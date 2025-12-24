@@ -3,7 +3,7 @@ export default function Home() {
     <main className="relative min-h-screen text-white">
       {/* BACKGROUND IMAGE */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-[center_35%]"
         style={{
           backgroundImage: "url('/Geisel.JPEG')",
         }}
@@ -49,13 +49,13 @@ export default function Home() {
         {/* HERO */}
         <section className="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-6 text-center">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-            Mechanical Engineering @ UC San Diego
+            Design. Build. Validate.
           </h2>
 
           <p className="mt-6 max-w-2xl text-gray-300">
-            I’m a Mechanical Engineering student at UC San Diego with hands-on
-            experience in design, manufacturing, and validation of mechanical
-            systems, graduating this summer.
+            Mechanical Engineering student at UC San Diego with hands-on experience
+            owning CAD-driven designs, fabricating hardware, and validating
+            mechanical systems through testing and iteration.
           </p>
 
           <div className="mt-10 flex gap-5">
@@ -68,7 +68,7 @@ export default function Home() {
 
             <a
               href="mailto:apsfin1@gmail.com"
-              className="rounded-xl border border-white/40 px-7 py-3 hover:bg-white hover:text-black transition"
+              className="rounded-xl border border-white/30 px-7 py-3 hover:bg-white hover:text-black transition"
             >
               Contact
             </a>
