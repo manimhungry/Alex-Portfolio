@@ -5,7 +5,7 @@ export default function Home() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/hero-bg.jpg')",
+          backgroundImage: "url('/Geisel.JPEG')",
         }}
       />
 
@@ -49,7 +49,7 @@ export default function Home() {
         {/* HERO */}
         <section className="flex min-h-[calc(100vh-80px)] flex-col items-center justify-center px-6 text-center">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-            
+            Mechanical Engineering @ UC San Diego
           </h2>
 
           <p className="mt-6 max-w-2xl text-gray-300">
