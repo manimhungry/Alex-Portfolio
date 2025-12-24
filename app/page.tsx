@@ -52,12 +52,6 @@ export default function Home() {
             Design. Build. Validate.
           </h2>
 
-          <p className="mt-6 max-w-2xl text-gray-300">
-            Mechanical Engineering student at UC San Diego with hands-on experience
-            owning CAD-driven designs, fabricating hardware, and validating
-            mechanical systems through testing and iteration.
-          </p>
-
           <div className="mt-10 flex gap-5">
             <a
               href="/projects"
