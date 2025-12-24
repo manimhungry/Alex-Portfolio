@@ -4,11 +4,9 @@ import Image from "next/image";
 export default function ProjectsPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-900 text-gray-100 px-8 py-12">
-
-      {/* Centered content column */}
       <div className="max-w-7xl mx-auto">
 
-        {/* Back to home */}
+        {/* BACK */}
         <div className="mb-10">
           <Link
             href="/"
@@ -18,20 +16,20 @@ export default function ProjectsPage() {
           </Link>
         </div>
 
-        {/* Page header */}
+        {/* HEADER */}
         <h1 className="text-4xl font-bold mb-3 text-white">
           Projects
         </h1>
 
-        <p className="text-gray-400 mb-14 max-w-3xl">
+        <p className="text-gray-400 mb-16 max-w-3xl">
           Selected engineering projects demonstrating mechanical design,
-          CAD ownership, fabrication, and system integration.
+          CAD ownership, fabrication, and system-level validation.
         </p>
 
-        {/* ===================================================== */}
-        {/* PROJECT 1 — TRITON ROBOTICS */}
-        {/* ===================================================== */}
-        <section className="max-w-6xl mx-auto bg-white/95 text-gray-900 rounded-2xl shadow-lg px-10 py-8 mb-20">
+        {/* ========================================================= */}
+        {/* TRITON ROBOTICS — DIRECT DRIVE TURRET */}
+        {/* ========================================================= */}
+        <section className="max-w-6xl mx-auto bg-white/95 text-gray-900 rounded-2xl shadow-lg px-10 py-10 mb-24">
 
           <h2 className="text-3xl font-semibold mb-1">
             Triton Robotics — Direct Drive Turret
@@ -41,39 +39,20 @@ export default function ProjectsPage() {
             Role: Mechanical Engineer (Primary CAD Owner) — CAD, Fabrication, Integration
           </p>
 
-          {/* IMAGE STRIP */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-
+          {/* IMAGES */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             <div className="relative aspect-video bg-gray-50 rounded-xl overflow-hidden ring-1 ring-gray-200">
-              <Image
-                src="/turret-overview.png"
-                alt="System overview with direct drive turret"
-                fill
-                className="object-contain"
-              />
+              <Image src="/turret-overview.png" alt="System overview" fill className="object-contain" />
             </div>
 
             <div className="relative aspect-video bg-gray-50 rounded-xl overflow-hidden ring-1 ring-gray-200">
-              <Image
-                src="/direct-drive-assembly.png"
-                alt="Direct drive turret assembly CAD"
-                fill
-                className="object-contain"
-              />
+              <Image src="/direct-drive-assembly.png" alt="Direct drive turret assembly" fill className="object-contain" />
             </div>
 
             <div className="relative aspect-video bg-gray-50 rounded-xl overflow-hidden ring-1 ring-gray-200">
-              <Image
-                src="/integrated-robot.png"
-                alt="Integrated robot platform"
-                fill
-                className="object-contain"
-              />
+              <Image src="/integrated-robot.png" alt="Integrated robot platform" fill className="object-contain" />
             </div>
-
           </div>
-
-          <hr className="my-8 border-gray-200" />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
@@ -81,105 +60,86 @@ export default function ProjectsPage() {
               <h3 className="text-lg font-semibold mb-3">What?</h3>
               <ul className="list-disc ml-5 space-y-3 text-gray-700">
                 <li>Redesigned a 2:1 pulley-driven turret into a single-motor direct-drive system.</li>
-                <li>Primary objective was eliminating backlash observed in the belt-driven configuration.</li>
-                <li>Simplified the mechanical architecture to improve response time and reliability.</li>
-                <li>Modified the chassis and structure to support the new drive layout.</li>
-                <li>Owned the complete turret CAD assembly in SolidWorks.</li>
+                <li>Primary objective was eliminating backlash in the belt-driven design.</li>
+                <li>Simplified architecture to improve response, reliability, and maintenance.</li>
+                <li>Owned and released the complete turret CAD assembly.</li>
               </ul>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-3">How?</h3>
               <ul className="list-disc ml-5 space-y-3 text-gray-700">
-                <li>Collaborated with senior ME and electrical teammates to align interfaces.</li>
-                <li>Iterated motor placement and geometry to reduce compliance.</li>
-                <li>Resolved slip ring alignment and drive concentricity challenges.</li>
-                <li>Iterated 3D-printed components (~5 revisions) to correct tolerance stack-ups.</li>
-                <li>Accepted reduced torque as a tradeoff for smoother response.</li>
+                <li>Primary CAD owner responsible for layout, interfaces, and tolerances.</li>
+                <li>Iterated motor placement and drive geometry.</li>
+                <li>Resolved slip-ring alignment and concentricity challenges.</li>
+                <li>Iterated 3D-printed parts (~5 revisions).</li>
               </ul>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-3">Results</h3>
               <ul className="list-disc ml-5 space-y-3 text-gray-700">
-                <li>Eliminated belt backlash, resulting in smoother turret motion.</li>
-                <li>Observed ~50% faster perceived response.</li>
-                <li>Completed power-on and closed-loop control testing.</li>
-                <li>Final CAD released; components fabricated and integrated successfully.</li>
+                <li>Eliminated belt backlash; smoother, repeatable motion.</li>
+                <li>~50% faster perceived response.</li>
+                <li>Completed power-on and closed-loop testing.</li>
+                <li>System integrated successfully.</li>
               </ul>
             </div>
 
           </div>
         </section>
 
-        {/* ===================================================== */}
-        {/* PROJECT 2 — TRITON UAS */}
-        {/* ===================================================== */}
-        <section className="max-w-6xl mx-auto bg-white/95 text-gray-900 rounded-2xl shadow-md px-10 py-10 mb-20">
+        {/* ========================================================= */}
+        {/* TRITON UAS — ONBOARDING AIRCRAFT */}
+        {/* ========================================================= */}
+        <section className="max-w-6xl mx-auto bg-white/95 text-gray-900 rounded-2xl shadow-lg px-10 py-10 mb-24">
 
           <h2 className="text-3xl font-semibold mb-1">
             Triton UAS — Onboarding Aircraft Project
           </h2>
 
-          <p className="italic text-gray-500 mb-6">
-            Role: Lead Mechanical Engineer — CAD, Fabrication, Integration · 1 Week Timeline
+          <p className="italic text-gray-500 mb-3">
+            Role: Lead Mechanical Engineer — CAD, Fabrication, Integration
           </p>
 
-          {/* FLIGHT VIDEO */}
-          <div className="mb-10">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              className="w-full rounded-xl border border-gray-200"
-            >
-              <source src="/Test.mp4" type="video/mp4" />
-            </video>
-            <p className="text-sm text-gray-500 mt-2 text-center">
-              First validated flight following rapid configuration iteration
-            </p>
-          </div>
-
-          <p className="max-w-4xl text-gray-700 mb-10">
-            Rapid design, fabrication, and flight validation of a fixed-wing UAV completed
-            under extreme time and material constraints as part of a one-week onboarding challenge.
+          <p className="text-sm text-gray-600 mb-12">
+            Completed as a rapid onboarding challenge under a one-week timeline
+            with strict material and fabrication constraints.
           </p>
 
-          {/* IMAGES */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            <img
-              src="/Side.png"
-              alt="Side view aircraft configuration"
-              className="w-full rounded-xl border bg-gray-50"
-            />
-            <img
-              src="/CAD.png"
-              alt="Aircraft CAD model"
-              className="w-full rounded-xl border bg-gray-50"
-            />
+          {/* WORK FIRST */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            <div>
+              <img src="/CAD.png" alt="Aircraft CAD" className="w-full rounded-xl border border-gray-200 object-contain" />
+              <p className="text-sm text-gray-500 mt-2 text-center">
+                CAD defining geometry and configuration decisions
+              </p>
+            </div>
+
+            <div>
+              <img src="/Side.png" alt="Foam prototype" className="w-full rounded-xl border border-gray-200 object-contain" />
+              <p className="text-sm text-gray-500 mt-2 text-center">
+                Physical prototype built for rapid iteration
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
             <div>
               <h3 className="text-lg font-semibold mb-3">What?</h3>
               <ul className="list-disc ml-5 space-y-3 text-gray-700">
-                <li>Designed and built a functional fixed-wing UAV within one week.</li>
+                <li>Designed and built a fixed-wing UAV within one week.</li>
                 <li>Initial configuration exhibited poor stability.</li>
-                <li>Reconfigured aircraft to a V-tail layout.</li>
-                <li>Optimized structure for rapid fabrication.</li>
+                <li>Reconfigured to a V-tail layout.</li>
               </ul>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-3">How?</h3>
               <ul className="list-disc ml-5 space-y-3 text-gray-700">
-                <li>Primary CAD owner for the complete aircraft assembly.</li>
+                <li>Primary CAD owner for full aircraft assembly.</li>
                 <li>Made all major configuration decisions.</li>
-                <li>Collaborated on sizing and balance decisions.</li>
-                <li>Used foam construction to enable fast iteration.</li>
+                <li>Iterated directly from flight behavior.</li>
               </ul>
             </div>
 
@@ -187,30 +147,120 @@ export default function ProjectsPage() {
               <h3 className="text-lg font-semibold mb-3">Results</h3>
               <ul className="list-disc ml-5 space-y-3 text-gray-700">
                 <li>Achieved stable, controlled flight.</li>
-                <li>Successful takeoff and sustained flight (~40 seconds).</li>
-                <li>Aircraft stabilized shortly after launch.</li>
-                <li>Early landing chosen to reduce test risk.</li>
+                <li>Sustained flight (~40 seconds).</li>
+                <li>Early landing chosen to reduce risk.</li>
               </ul>
             </div>
-
           </div>
 
-          <div className="mt-10">
-            <h3 className="text-lg font-semibold mb-3">
-              What I’d Improve With More Time
-            </h3>
-            <ul className="list-disc ml-5 space-y-2 text-gray-700 max-w-4xl">
-              <li>Transition to stiffer, higher-quality materials.</li>
-              <li>Improve rigidity and finish.</li>
-              <li>Additional flight tuning and validation.</li>
-            </ul>
+          {/* VIDEO LAST */}
+          <div className="max-w-4xl mx-auto">
+            <video
+              src="/Test.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="w-full rounded-2xl border border-gray-200 shadow-md"
+            />
+            <p className="text-sm text-gray-500 mt-2 text-center">
+              Flight validation following rapid iteration
+            </p>
           </div>
 
         </section>
 
-        <p className="text-gray-400 italic">
-          More projects coming soon.
-        </p>
+     {/* ========================================================= */}
+{/* BALL RETRIEVAL ROBOT — COMPETITIVE ROBOTICS */}
+{/* ========================================================= */}
+<section className="max-w-6xl mx-auto bg-white/95 text-gray-900 rounded-2xl shadow-lg px-10 py-10 mb-24">
+
+  <h2 className="text-3xl font-semibold mb-1">
+    Ball Retrieval Robot — Competitive Robotics
+  </h2>
+
+  <p className="italic text-gray-500 mb-8">
+    Role: Mechanical Engineer — CAD, Fabrication, Integration
+  </p>
+
+  {/* IMAGE OVERVIEW */}
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+
+    <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+      <img src="/Field.png" alt="Competition field layout" className="w-full object-contain" />
+      <p className="text-sm text-gray-500 text-center py-2">
+        Competition field and task constraints
+      </p>
+    </div>
+
+    <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+      <img src="/CADR.png" alt="Robot CAD model" className="w-full object-contain" />
+      <p className="text-sm text-gray-500 text-center py-2">
+        CAD defining system layout and mechanisms
+      </p>
+    </div>
+
+    <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+      <img src="/Real.png" alt="Built robot hardware" className="w-full object-contain" />
+      <p className="text-sm text-gray-500 text-center py-2">
+        Final fabricated robot
+      </p>
+    </div>
+
+  </div>
+
+  {/* WHAT / HOW / RESULTS */}
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-14">
+
+    {/* WHAT */}
+    <div>
+      <h3 className="text-lg font-semibold mb-3">What?</h3>
+      <ul className="list-disc ml-5 space-y-2 text-gray-700">
+        <li>Designed and built a robot to retrieve and deposit balls during a timed competition.</li>
+        <li>Optimized for speed, reliability, and repeatable mechanical performance.</li>
+      </ul>
+    </div>
+
+    {/* HOW */}
+    <div>
+      <h3 className="text-lg font-semibold mb-3">How?</h3>
+      <ul className="list-disc ml-5 space-y-2 text-gray-700">
+        <li>Primary mechanical designer and CAD owner.</li>
+        <li>Developed mechanisms using Fusion 360 and AutoCAD.</li>
+        <li>Designed linkages, gears, and bearing-supported joints.</li>
+        <li>Fabricated parts using shop tools and 3D printing.</li>
+      </ul>
+    </div>
+
+    {/* RESULTS */}
+    <div>
+      <h3 className="text-lg font-semibold mb-3">Results</h3>
+      <ul className="list-disc ml-5 space-y-2 text-gray-700">
+        <li>Successfully completed competition objectives.</li>
+        <li>Consistent, repeatable performance across test runs.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  {/* ACTION VIDEO — PROOF */}
+  <div className="max-w-4xl mx-auto">
+    <video
+      src="/Action.mp4"
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      className="w-full rounded-xl border border-gray-200 shadow-md"
+    />
+    <p className="text-sm text-gray-500 mt-2 text-center">
+      Competition run demonstrating system performance
+    </p>
+  </div>
+
+</section>
 
       </div>
     </main>
