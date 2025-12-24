@@ -96,88 +96,116 @@ export default function ProjectsPage() {
         <section className="max-w-6xl mx-auto bg-white/95 text-gray-900 rounded-2xl shadow-md px-10 py-10 mb-20">
 
           <h2 className="text-3xl font-semibold mb-1">
-            Triton UAS — Onboarding Aircraft Project
-          </h2>
+           {/* ================= PROJECT 2 ================= */}
+<section className="max-w-6xl mx-auto bg-white/95 text-gray-900 rounded-2xl shadow-md px-10 py-10 mb-20">
 
-          <p className="italic text-gray-500 mb-6">
-            Role: Lead Mechanical Engineer — CAD, Fabrication, Integration · 1 Week
-          </p>
+  {/* Title */}
+  <h2 className="text-3xl font-semibold mb-1">
+    Triton UAS — Onboarding Aircraft Project
+  </h2>
 
-          {/* Flight video */}
-          <div className="mb-10">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              className="w-full rounded-xl border border-gray-200"
-            >
-              <source src="/Test.MP4" type="video/mp4" />
-            </video>
-            <p className="text-sm text-gray-500 mt-2 text-center">
-              First validated flight following rapid configuration iteration
-            </p>
-          </div>
+  <p className="italic text-gray-500 mb-6">
+    Role: Lead Mechanical Engineer — CAD, Fabrication, Integration · 1 Week Timeline
+  </p>
 
-          <p className="max-w-4xl text-gray-700 mb-10">
-            Rapid design, fabrication, and flight validation of a fixed-wing UAV completed
-            under extreme time and material constraints as part of a one-week onboarding challenge.
-          </p>
+  {/* HERO FLIGHT VIDEO */}
+  <div className="mb-10">
+    <video
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+      className="w-full rounded-xl border border-gray-200"
+    >
+      <source src="/Test.mp4" type="video/mp4" />
+    </video>
 
-          {/* Images */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            <img src="/Side.PNG" alt="Side view aircraft" className="w-full rounded-xl border bg-gray-50" />
-            <img src="/CAD.PNG" alt="Aircraft CAD model" className="w-full rounded-xl border bg-gray-50" />
-          </div>
+    <p className="text-sm text-gray-500 mt-2 text-center">
+      First validated flight following rapid configuration iteration
+    </p>
+  </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+  {/* OVERVIEW */}
+  <p className="max-w-4xl text-gray-700 mb-10">
+    Designed, built, and flight-tested a fixed-wing UAV as part of a one-week onboarding
+    challenge. Owned mechanical design decisions from initial concept through flight
+    validation under extreme time and material constraints.
+  </p>
 
-            <div>
-              <h3 className="text-lg font-semibold mb-3">What?</h3>
-              <ul className="list-disc ml-5 space-y-3 text-gray-700">
-                <li>Designed and built a functional fixed-wing UAV within one week.</li>
-                <li>Resolved early instability by transitioning to a V-tail configuration.</li>
-                <li>Optimized structure for rapid fabrication and iteration.</li>
-              </ul>
-            </div>
+  {/* SUPPORTING IMAGES */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
 
-            <div>
-              <h3 className="text-lg font-semibold mb-3">How?</h3>
-              <ul className="list-disc ml-5 space-y-3 text-gray-700">
-                <li>Primary CAD owner for the full aircraft assembly.</li>
-                <li>Led all configuration decisions including tail and motor placement.</li>
-                <li>Collaborated with teammates on sizing decisions.</li>
-                <li>Used foam construction to enable speed, cost efficiency, and iteration.</li>
-              </ul>
-            </div>
+    <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+      <img
+        src="/Side.png"
+        alt="Side view aircraft configuration"
+        className="w-full object-contain"
+      />
+      <p className="text-sm text-gray-500 text-center py-2">
+        Final aircraft configuration (foam construction for rapid iteration)
+      </p>
+    </div>
 
-            <div>
-              <h3 className="text-lg font-semibold mb-3">Results</h3>
-              <ul className="list-disc ml-5 space-y-3 text-gray-700">
-                <li>Achieved stable, controlled flight after configuration change.</li>
-                <li>Successful takeoff and sustained flight (~40 seconds).</li>
-                <li>Aircraft stabilized shortly after launch.</li>
-                <li>Early landing chosen intentionally to reduce test risk.</li>
-              </ul>
-            </div>
+    <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+      <img
+        src="/CAD.png"
+        alt="Aircraft CAD model"
+        className="w-full object-contain"
+      />
+      <p className="text-sm text-gray-500 text-center py-2">
+        CAD model used to define geometry, layout, and integration
+      </p>
+    </div>
 
-          </div>
+  </div>
 
-          <div className="mt-10">
-            <h3 className="text-lg font-semibold mb-3">What I’d Improve With More Time</h3>
-            <ul className="list-disc ml-5 space-y-2 text-gray-700 max-w-4xl">
-              <li>Transition to stiffer, higher-quality structural materials.</li>
-              <li>Improve rigidity, finish, and integration cleanliness.</li>
-              <li>Additional flight tuning and validation.</li>
-            </ul>
-          </div>
+  {/* DETAILS */}
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
-        </section>
+    {/* WHAT */}
+    <div>
+      <h3 className="text-lg font-semibold mb-3">What?</h3>
+      <ul className="list-disc ml-5 space-y-3 text-gray-700">
+        <li>Designed and built a functional fixed-wing UAV within a one-week timeline.</li>
+        <li>Initial configuration exhibited poor stability and failed to sustain flight.</li>
+        <li>Reconfigured the aircraft from a conventional tail to a V-tail layout.</li>
+        <li>Optimized structure for rapid fabrication and iteration.</li>
+      </ul>
+    </div>
 
-        <p className="text-gray-400 italic">More projects coming soon.</p>
+    {/* HOW */}
+    <div>
+      <h3 className="text-lg font-semibold mb-3">How?</h3>
+      <ul className="list-disc ml-5 space-y-3 text-gray-700">
+        <li>Primary CAD owner for the complete aircraft assembly.</li>
+        <li>Made all major configuration decisions including tail geometry and motor placement.</li>
+        <li>Collaborated with teammates on sizing and balance decisions.</li>
+        <li>Used foam construction to enable speed, cost efficiency, and iteration.</li>
+      </ul>
+    </div>
 
-      </div>
-    </main>
-  );
-}
+    {/* RESULTS */}
+    <div>
+      <h3 className="text-lg font-semibold mb-3">Results</h3>
+      <ul className="list-disc ml-5 space-y-3 text-gray-700">
+        <li>Achieved stable, controlled flight following V-tail configuration change.</li>
+        <li>Successful takeoff and sustained flight (~40 seconds).</li>
+        <li>Aircraft stabilized shortly after launch and maintained control.</li>
+        <li>Early landing chosen intentionally to reduce test risk.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  {/* IMPROVEMENTS */}
+  <div className="mt-10">
+    <h3 className="text-lg font-semibold mb-3">What I’d Improve With More Time</h3>
+    <ul className="list-disc ml-5 space-y-2 text-gray-700 max-w-4xl">
+      <li>Transition to stiffer, higher-quality structural materials.</li>
+      <li>Improve overall rigidity, finish, and integration cleanliness.</li>
+      <li>Additional flight tuning and validation.</li>
+    </ul>
+  </div>
+
+</section>
