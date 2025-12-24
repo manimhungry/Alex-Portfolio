@@ -5,23 +5,33 @@ export default function ExperiencePage() {
     <main className="min-h-screen bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-900 text-gray-100 px-8 py-12">
 
       {/* BACK */}
-      <div className="mb-10">
-        <Link
-          href="/"
-          className="text-sm text-gray-400 hover:text-white transition"
-        >
-          ← Back to Home
-        </Link>
-      </div>
+<div className="mb-10 text-center">
+  <Link
+    href="/"
+    className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition"
+  >
+    ← Back to Home
+  </Link>
+</div>
 
+{/* HEADER */}
+<div className="text-center mb-14">
+  <h1 className="text-4xl font-bold mb-4 text-white">
+    Experience
+  </h1>
+
+  <p className="text-gray-400 max-w-3xl mx-auto">
+    Industry experience focused on sustainment engineering, CAD ownership,
+    and verification of production mechanical systems.
+  </p>
+</div>
       {/* HEADER */}
       <h1 className="text-4xl font-bold mb-3 text-white">
-        Experience
+        
       </h1>
 
       <p className="text-gray-400 mb-14 max-w-3xl">
-        Industry experience focused on sustainment engineering, CAD ownership,
-        and verification of production mechanical systems.
+        
       </p>
 
       {/* ================= LEICA CARD ================= */}

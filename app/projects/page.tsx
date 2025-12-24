@@ -6,24 +6,36 @@ export default function ProjectsPage() {
     <main className="min-h-screen bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-900 text-gray-100 px-8 py-12">
       <div className="max-w-7xl mx-auto">
 
-        {/* BACK */}
-        <div className="mb-10">
-          <Link
-            href="/"
-            className="text-sm text-gray-400 hover:text-white transition"
-          >
-            ← Back to Home
-          </Link>
-        </div>
+    {/* BACK */}
+<div className="mb-10 text-center">
+  <Link
+    href="/"
+    className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition"
+  >
+    ← Back to Home
+  </Link>
+</div>
+
+{/* HEADER */}
+<div className="text-center mb-16">
+  <h1 className="text-4xl font-bold mb-4 text-white">
+    Projects
+  </h1>
+
+  <p className="text-gray-400 max-w-3xl mx-auto">
+    Selected engineering projects demonstrating mechanical design,
+    CAD ownership, fabrication, and system-level validation.
+  </p>
+</div>
+
 
         {/* HEADER */}
         <h1 className="text-4xl font-bold mb-3 text-white">
-          Projects
+          
         </h1>
 
         <p className="text-gray-400 mb-16 max-w-3xl">
-          Selected engineering projects demonstrating mechanical design,
-          CAD ownership, fabrication, and system-level validation.
+          
         </p>
 
         {/* ========================================================= */}
