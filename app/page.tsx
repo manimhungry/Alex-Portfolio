@@ -3,7 +3,7 @@ export default function Home() {
     <main className="relative min-h-screen text-white">
       {/* BACKGROUND IMAGE */}
       <div
-        className="absolute inset-0 bg-cover bg-[center_35%]"
+        className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: "url('/Geisel.JPEG')",
         }}
@@ -21,11 +21,20 @@ export default function Home() {
               Alex Pacheco Santiago
             </h1>
             <p className="text-sm text-gray-400">
-              Mechanical Engineering – University of California San Diego
+              Mechanical Engineering — UC San Diego
             </p>
           </div>
 
           <div className="flex items-center gap-6 text-sm text-gray-300">
+            <a
+              href="/Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+            >
+              Resume
+            </a>
+
             <a
               href="mailto:apsfin1@gmail.com"
               className="hover:text-white transition"
@@ -52,7 +61,8 @@ export default function Home() {
             Design. Build. Validate.
           </h2>
 
-          <div className="mt-10 flex gap-5">
+          {/* HERO BUTTONS */}
+          <div className="mt-10 flex flex-wrap justify-center gap-5">
             <a
               href="/projects"
               className="rounded-xl bg-white px-7 py-3 text-black font-semibold hover:bg-gray-200 transition"
@@ -61,8 +71,15 @@ export default function Home() {
             </a>
 
             <a
+              href="/experience"
+              className="rounded-xl border border-white/40 px-7 py-3 hover:bg-white hover:text-black transition"
+            >
+              Experience
+            </a>
+
+            <a
               href="mailto:apsfin1@gmail.com"
-              className="rounded-xl border border-white/30 px-7 py-3 hover:bg-white hover:text-black transition"
+              className="rounded-xl border border-white/40 px-7 py-3 hover:bg-white hover:text-black transition"
             >
               Contact
             </a>
