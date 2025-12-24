@@ -23,7 +23,7 @@ export default function Home() {
           </a>
 
           <a
-            href="https://www.linkedin.com/"
+            href="hhttps://www.linkedin.com/in/alex-pacheco-santiago-4b5021295/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition underline"
@@ -40,13 +40,12 @@ export default function Home() {
       {/* HERO */}
       <section className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
         <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
-          Mechanical Engineering Portfolio
+          Mechanical Engineering @UCSD 
         </h2>
 
         <p className="mt-6 max-w-2xl text-gray-400">
-          Aspiring mechanical engineer focused on mechanical design, CAD, and
-          finite element analysis. Interested in real-world hardware systems and
-          graduate-level engineering.
+          I’m a Mechanical Engineering student at UC San Diego with hands-on experience in design, 
+          manufacturing, and validation of mechanical systems graduating this summer. 
         </p>
 
         <div className="mt-10 flex gap-5">
