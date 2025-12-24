@@ -2,30 +2,30 @@ import Link from "next/link";
 
 export default function ProjectsPage() {
   return (
-    <main className="min-h-screen bg-[#f3f4f6] text-gray-900 px-8 py-12">
-      
+    <main className="min-h-screen bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-900 text-gray-100 px-8 py-12">
+
       {/* Back to home */}
       <div className="mb-10">
         <Link
           href="/"
-          className="text-sm text-gray-600 hover:text-black transition"
+          className="text-sm text-gray-400 hover:text-white transition"
         >
           ← Back to Home
         </Link>
       </div>
 
       {/* Page header */}
-      <h1 className="text-4xl font-bold mb-3">
+      <h1 className="text-4xl font-bold mb-3 text-white">
         Projects
       </h1>
 
-      <p className="text-gray-600 mb-12 max-w-3xl">
+      <p className="text-gray-400 mb-12 max-w-3xl">
         Selected engineering projects demonstrating mechanical design,
         CAD modeling, fabrication, and system integration.
       </p>
 
       {/* PROJECT CARD */}
-      <section className="max-w-4xl bg-white rounded-2xl shadow-md p-8 mb-16">
+      <section className="max-w-4xl bg-white/95 text-gray-900 rounded-2xl shadow-xl p-8 mb-16">
         <h2 className="text-2xl font-semibold mb-1">
           Triton Robotics — Direct Drive Turret
         </h2>
@@ -51,7 +51,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* Placeholder */}
-      <p className="text-gray-500 italic">
+      <p className="text-gray-400 italic">
         More projects coming soon.
       </p>
 
