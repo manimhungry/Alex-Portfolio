@@ -65,7 +65,7 @@ export default function ExperiencePage() {
                 leveraged by senior engineers for sustaining work and future next generation (e.g., CS5).
               </p>
 
-              {/* PROOF CHIPS (SEPARATED TO AVOID MISREADING) */}
+              {/* PROOF CHIPS */}
               <div className="mt-4 space-y-2.5">
                 <div>
                   <p className="text-[11px] font-semibold tracking-wide text-gray-700 uppercase mb-1.5">
@@ -99,7 +99,7 @@ export default function ExperiencePage() {
 
               <p className="text-[12px] text-gray-600 leading-relaxed mb-3">
                 <span className="font-semibold text-gray-800">Aperio CS2</span> is a desktop whole-slide imaging scanner that
-                digitizes glass pathology slides into high-resolution images for downstream review and analysis.
+                digitizes glass pathology slides into high-resolution images.
               </p>
 
               <div className="flex flex-wrap gap-2">
@@ -123,76 +123,35 @@ export default function ExperiencePage() {
               <ul className="list-disc ml-5 space-y-2 text-gray-700 text-sm leading-relaxed">
                 <li>
                   Recovered BOM/CAD configuration from{" "}
-                  <span className="font-semibold">15/60 (25%) → 57/60 (95%)</span> by adding{" "}
-                  <span className="font-semibold">25</span> current parts and removing{" "}
-                  <span className="font-semibold">30</span> obsolete parts (remaining{" "}
-                  <span className="font-semibold">3/60</span> cables excluded per scope).
+                  <span className="font-semibold">15/60 (25%) → 57/60 (95%)</span> by resolving
+                  obsolete components and missing design references.
                 </li>
                 <li>
-                  Resolved <span className="font-semibold">~100</span> SOLIDWORKS failures (broken references + mate errors) and
+                  Resolved <span className="font-semibold">~100</span> SOLIDWORKS failures and
                   verified corrections against the physical scanner via{" "}
                   <span className="font-semibold">fit checks + dimensional verification</span>.
                 </li>
                 <li>
                   Released a CAD/BOM <span className="font-semibold">configuration baseline</span> used by
-                  engineering/manufacturing and leveraged by senior engineers for sustaining and future platform work{" "}
-                  <span className="font-semibold">(e.g., CS5)</span>.
+                  engineering/manufacturing for sustaining and future platform work.
                 </li>
               </ul>
-
-              <p className="mt-3 text-sm text-gray-700 leading-relaxed">
-                <span className="font-semibold">Why it matters:</span> Demonstrates configuration recovery under ambiguity—
-                translating as-built production reality into a trusted CAD/BOM reference within design-control review/sign-off.
-              </p>
             </div>
 
             {/* OTHER INTERNSHIP WORK */}
             <div>
-              <h3 className="text-lg font-semibold mb-2.5">Additional internship execution (separate from CS2)</h3>
+              <h3 className="text-lg font-semibold mb-2.5">Additional internship execution</h3>
               <ul className="list-disc ml-5 space-y-2 text-gray-700 text-sm leading-relaxed">
                 <li>
-                  Executed <span className="font-semibold">15+</span> manufacturing build/teardown procedures supporting
-                  sustainment work and hardware readiness.
+                  Executed <span className="font-semibold">15+</span> manufacturing build/teardown procedures.
                 </li>
                 <li>
-                  Executed <span className="font-semibold">5</span> formal V&amp;V procedures, including{" "}
-                  <span className="font-semibold">3×360-cycle</span> wipe durability testing; documented results for review.
+                  Executed <span className="font-semibold">5</span> formal V&amp;V procedures, including hardware durability testing.
                 </li>
                 <li>
-                  Built an <span className="font-semibold">Excel traceability tracker</span> for part/requirement status within
-                  design-control workflows to improve cross-team visibility (design, manufacturing, V&amp;V).
+                  Built an <span className="font-semibold">Excel traceability tracker</span> for design-control workflows.
                 </li>
               </ul>
-            </div>
-          </div>
-
-          {/* MEDIA */}
-          <hr className="my-8 border-gray-200" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden">
-              <div className="px-5 py-3 border-b border-gray-200">
-                <h4 className="font-semibold">XY Stage — Production Motion Validation</h4>
-              </div>
-              <div className="bg-black">
-                <video src="/XY.mp4" autoPlay loop muted playsInline className="w-full h-auto" />
-              </div>
-              <p className="px-5 py-3 text-sm text-gray-600 leading-relaxed">
-                Validated corrected CAD against production motion behavior after reconciliation.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden">
-              <div className="px-5 py-3 border-b border-gray-200">
-                <h4 className="font-semibold">Internal Assemblies — Updated CAD Representation</h4>
-              </div>
-              <div className="bg-white">
-                <video src="/PARTS.mp4" autoPlay loop muted playsInline className="w-full h-auto" />
-              </div>
-              <p className="px-5 py-3 text-sm text-gray-600 leading-relaxed">
-                Rebuilt internal assemblies to reflect as-built placement and interfaces for manufacturing reference and senior
-                engineer review.
-              </p>
             </div>
           </div>
         </div>
