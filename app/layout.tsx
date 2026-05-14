@@ -1,29 +1,35 @@
 import type { Metadata } from "next";
+import { Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Alex Pacheco Santiago | Mechanical Engineer",
+  title: "Alex Pacheco | Mechanical Engineering Portfolio",
   description:
-    "Mechanical engineering portfolio focused on CAD, prototyping, robotics hardware, fixture design, manufacturing support, and validation.",
+    "Mechanical design, CAD, prototyping, testing, and validation portfolio.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${manrope.variable} font-sans antialiased`}>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:bg-white focus:px-4 focus:py-2 focus:text-black"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-black"
         >
           Skip to main content
         </a>
-
         {children}
         <Analytics />
         <SpeedInsights />
