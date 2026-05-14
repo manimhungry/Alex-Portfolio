@@ -1477,7 +1477,7 @@ function FeaturedNordsonCaseStudy() {
             </h3>
           </div>
           <p className="max-w-lg text-sm leading-6 text-gray-400 md:text-right">
-            Placeholders for the videos you mentioned.
+            Coming Soon 
           </p>
         </div>
 
