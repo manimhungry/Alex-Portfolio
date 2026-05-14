@@ -233,7 +233,7 @@ const otherProjects: Project[] = [
       type: "image",
       src: "/turret-overview.png",
       alt: "Direct-drive turret overview",
-      caption: "Direct-drive turret redesign integrated into the robot system",
+      caption: "Old pulley system in the robot system",
       contain: true,
       callouts: [
         "2:1 belt path removed",
