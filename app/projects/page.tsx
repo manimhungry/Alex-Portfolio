@@ -240,18 +240,18 @@ const otherProjects: Project[] = [
     ],
     evidence: [
       {
-      type: "image",
-      src: "/direct-drive-assembly.png",
-      alt: "Direct-drive turret assembly CAD",
-      caption: "Direct-drive motor mount and bearing stack",
+        type: "image",
+        src: "/direct-drive-assembly.png",
+        alt: "Direct-drive turret assembly CAD",
+        caption: "Direct-drive motor mount and bearing stack",
         contain: true,
         callouts: ["Direct-drive assembly", "Mount stack", "Slip-ring clearance"],
       },
       {
         type: "image",
-      src: "/integrated-robot.png",
-      alt: "Integrated robot with turret",
-      caption: "Turret integrated on the robot platform",
+        src: "/integrated-robot.png",
+        alt: "Integrated robot with turret",
+        caption: "Turret integrated on the robot platform",
         callouts: ["Subsystem integrated", "Service access improved"],
       },
     ],
@@ -490,12 +490,28 @@ function DetailCard({
   );
 }
 
+function TagList({ tags }: { tags: string[] }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <span
+          key={tag}
+          className="rounded-full border border-white/10 bg-white/[0.055] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-gray-200"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function PreviewMedia({ item }: { item: Media }) {
   return (
     <div className="relative h-56 overflow-hidden border-b border-white/10 bg-black/30">
       {item.type === "video" ? (
         <video
           src={item.src}
+          aria-label={item.caption ?? "Project preview video"}
           autoPlay
           loop
           muted
@@ -516,7 +532,6 @@ function PreviewMedia({ item }: { item: Media }) {
       )}
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-
     </div>
   );
 }
@@ -538,6 +553,7 @@ function MediaCard({
         {item.type === "video" ? (
           <video
             src={item.src}
+            aria-label={item.caption ?? "Project video"}
             autoPlay
             loop
             muted
@@ -574,6 +590,7 @@ function VideoPlaceholder({ slot }: { slot: VideoSlot }) {
       <div className="relative h-80 bg-black/30 md:h-[420px]">
         <video
           src={slot.src}
+          aria-label={slot.caption}
           autoPlay
           loop
           muted
@@ -634,6 +651,7 @@ function InlineMedia({
         {item.type === "video" ? (
           <video
             src={item.src}
+            aria-label={item.alt ?? item.caption ?? "Project video"}
             autoPlay
             loop
             muted
@@ -920,10 +938,6 @@ function ShrinkageVisual() {
   );
 }
 
-function ResultVisual() {
-  return <TestingEvidenceVisual />;
-}
-
 function CompactCalibrationPlot() {
   const width = 580;
   const height = 250;
@@ -1110,7 +1124,7 @@ function SideMenu() {
         <div className="mb-4 space-y-3">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-gray-400 transition hover:bg-white/[0.07] hover:text-white"
+            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-gray-300 transition hover:bg-white/[0.07] hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300/60"
           >
             ← Back to Home
           </Link>
@@ -1134,7 +1148,7 @@ function SideMenu() {
                 <a
                   key={chapter.id}
                   href={`#${chapter.id}`}
-                  className="block rounded-lg px-3 py-1.5 text-xs text-gray-400 transition hover:bg-white/[0.06] hover:text-blue-200"
+                  className="block rounded-lg px-3 py-1.5 text-xs text-gray-300 transition hover:bg-white/[0.06] hover:text-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
                 >
                   {chapter.eyebrow.replace("/", "·")}
                 </a>
@@ -1147,7 +1161,7 @@ function SideMenu() {
               <a
                 key={project.id}
                 href={`#${project.id}`}
-                className="block rounded-xl px-3 py-2 font-medium text-gray-300 transition hover:bg-white/[0.07] hover:text-white"
+                className="block rounded-xl px-3 py-2 font-medium text-gray-300 transition hover:bg-white/[0.07] hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300/60"
               >
                 {project.title}
               </a>
@@ -1167,14 +1181,14 @@ function MobileJumpMenu() {
     >
       <Link
         href="/"
-        className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium text-gray-200"
+        className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
       >
         ← Home
       </Link>
 
       <a
         href="#nordson"
-        className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium text-gray-200"
+        className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
       >
         Nordson
       </a>
@@ -1183,7 +1197,7 @@ function MobileJumpMenu() {
         <a
           key={project.id}
           href={`#${project.id}`}
-          className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium text-gray-400"
+          className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
         >
           {project.title}
         </a>
@@ -1208,7 +1222,7 @@ function ProjectGallery() {
           <a
             key={project.id}
             href={`#${project.id}`}
-            className="group overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-1 hover:border-blue-300/25 hover:bg-white/[0.055]"
+            className="group overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-1 hover:border-blue-300/25 hover:bg-white/[0.055] focus:outline-none focus:ring-2 focus:ring-blue-300/60"
           >
             <PreviewMedia item={project.media} />
 
@@ -1223,6 +1237,21 @@ function ProjectGallery() {
                 </h3>
               </div>
 
+              <div className="mt-5 rounded-2xl border border-blue-300/15 bg-blue-400/[0.07] p-4">
+                <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-200">
+                  Outcome
+                </div>
+                <div className="mt-2 text-2xl font-semibold tracking-tight text-white">
+                  {project.signal}
+                </div>
+                <p className="mt-2 text-sm leading-6 text-gray-200">
+                  {project.result}
+                </p>
+              </div>
+
+              <div className="mt-4">
+                <TagList tags={project.tags} />
+              </div>
             </div>
           </a>
         ))}
@@ -1245,7 +1274,7 @@ function ChapterSection({ chapter }: { chapter: Chapter }) {
           {chapter.title}
         </h3>
 
-        <p className="mt-4 max-w-5xl text-sm leading-6 text-gray-300 md:text-base md:leading-7">
+        <p className="mt-4 max-w-5xl text-sm leading-6 text-gray-200 md:text-base md:leading-7">
           {chapter.summary}
         </p>
 
@@ -1271,6 +1300,13 @@ function ChapterSection({ chapter }: { chapter: Chapter }) {
 }
 
 function FeaturedNordsonCaseStudy() {
+  const summaryMetrics = [
+    { label: "Target", value: "5 µL" },
+    { label: "Validated", value: "100 positions" },
+    { label: "Scaled tray", value: "178 slots" },
+    { label: "Correction", value: "40 → 38 mm" },
+  ];
+
   return (
     <section id="nordson" className="mb-36 scroll-mt-24">
       <div className="mb-8">
@@ -1285,6 +1321,25 @@ function FeaturedNordsonCaseStudy() {
         <p className="mt-3 max-w-5xl text-lg text-gray-300">
           Mechanical Owner — Fixture Design, Calibration, and Test
         </p>
+      </div>
+
+      <div className="mb-8 grid gap-4 rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5 md:grid-cols-[1fr_1.1fr] md:p-6">
+        <div>
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+            Executive Summary
+          </div>
+          <p className="mt-3 text-base leading-7 text-gray-200">
+            I converted a manual dispense process into a calibrated robot
+            workflow by designing the tray fixture, validating pressure settings,
+            and iterating on real hardware until the dispense rows were clean.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          {summaryMetrics.map((metric) => (
+            <MetricCard key={metric.label} {...metric} />
+          ))}
+        </div>
       </div>
 
       <MediaCard
@@ -1357,6 +1412,14 @@ function CompactProjectSection({
         <p className="mt-3 max-w-4xl text-lg text-gray-300">
           {project.role}
         </p>
+
+        <p className="mt-4 max-w-4xl text-base leading-7 text-gray-200">
+          {project.summary}
+        </p>
+
+        <div className="mt-5">
+          <TagList tags={project.tags} />
+        </div>
       </div>
 
       <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
