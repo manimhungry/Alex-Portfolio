@@ -28,6 +28,8 @@ type Chapter = {
 type VideoSlot = {
   title: string;
   note: string;
+  src: string;
+  caption: string;
   callouts: string[];
 };
 
@@ -58,78 +60,29 @@ type ProjectPreview = {
   tags: string[];
 };
 
-type SnapshotCard = {
-  title: string;
-  text: string;
-};
-
-type SkillCard = {
-  label: string;
-  examples: string;
-};
-
-const nordsonMetrics: Metric[] = [
-  { label: "Target volume", value: "5 µL" },
-  { label: "Calibration", value: "24 → 54 kPa" },
-  { label: "CAD correction", value: "40 → 38 mm" },
-  { label: "Scale-up", value: "10 → 178 slots" },
-  { label: "Print shrinkage", value: "3.12 mm" },
-  { label: "XY compensation", value: "100.89%" },
-];
-
-const nordsonTags = [
-  "Fixture Design",
-  "CAD Correction",
-  "Dispense Calibration",
-  "FDM Prototyping",
-  "Scale-Up",
-];
-
 const nordsonChapters: Chapter[] = [
   {
     id: "nordson-overview",
-    eyebrow: "01 / Overview",
-    title: "Manual dispensing → robot workflow",
-    summary: "Fixture-based workflow for repeatable 5 µL dispensing.",
+    eyebrow: "01 / System",
+    title: "Manual → automated",
+    summary: "In the Wang Lab, I built a workflow that taught the Nordson robot where to move, what to look for with image detection, and how to repeat the dispense steps across a tray.",
     bullets: [
-      "Built tray workflow",
-      "Combined fixture, robot setup, and calibration",
-      "Validated with water",
+      "100-position dispense run",
+      "Step-and-repeat robot motion",
+      "Tray-based sensor workflow",
     ],
     metrics: [
       { label: "Target", value: "5 µL" },
-      { label: "Tray scale", value: "10 → 178" },
-    ],
-  },
-  {
-    id: "nordson-cad-vs-reality",
-    eyebrow: "02 / CAD vs Reality",
-    title: "CAD did not match hardware",
-    summary: "The plate measured 38 mm, not the 40 mm CAD assumption.",
-    bullets: [
-      "Measured baseplate",
-      "Found 2 mm spacing error",
-      "Rebuilt around measured hardware",
-    ],
-    metrics: [{ label: "Hole spacing", value: "40 → 38 mm" }],
-  },
-  {
-    id: "nordson-fixture-design",
-    eyebrow: "03 / Fixture Design",
-    title: "Tray controlled placement",
-    summary: "The fixture reduced alignment dependence on manual placement.",
-    bullets: [
-      "Designed around a fixed datum",
-      "Printed fit-check iterations",
-      "Improved sensor positioning",
+      { label: "Validated run", value: "100 positions" },
     ],
   },
   {
     id: "nordson-calibration",
-    eyebrow: "04 / Dispense Calibration",
-    title: "Pressure set by interpolation",
-    summary: "Droplet mass tests bracketed the 5 µL target.",
+    eyebrow: "02 / Calibration",
+    title: "Pressure → droplet mass",
+    summary: "My PI emphasized that the droplets needed to be 5 µL, so I measured dispense mass at different pressures and used interpolation to land on the target setting.",
     bullets: [
+      "24 kPa → 2.9 µL",
       "48 kPa → 4.6 µL",
       "54 kPa → 5.3 µL",
       "5 µL target → ~51.4 kPa",
@@ -142,65 +95,92 @@ const nordsonChapters: Chapter[] = [
     ],
   },
   {
-    id: "nordson-scale-up",
-    eyebrow: "05 / Scale-Up",
-    title: "Scaled inside robot travel",
-    summary: "The final tray layout stayed inside the usable machine envelope.",
+    id: "nordson-cad-vs-reality",
+    eyebrow: "03 / CAD vs Reality",
+    title: "CAD ≠ hardware",
+    summary: "I was confused why the 40 mm hole spacing from Nordson's reference CAD was not working. After measuring the real plate, I found it was actually 38 mm and rebuilt the geometry myself.",
     bullets: [
-      "Started with small arrays",
-      "Checked travel limit",
-      "Landed on 178 slots",
+      "Found 40 mm → 38 mm mismatch",
+      "Measured the real baseplate",
+      "Rebuilt the fixture around real hardware",
+    ],
+    metrics: [{ label: "Hole spacing", value: "40 → 38 mm" }],
+  },
+  {
+    id: "nordson-fixture-design",
+    eyebrow: "04 / Fixture Design",
+    title: "Tray locks to datum",
+    summary: "The first 10-slot tray proved the idea, but angle and placement still varied. I added a prong-style fixture so the tray locked into a repeatable position.",
+    bullets: [
+      "Used real plate holes",
+      "Selected prong-style locking",
+      "Added orientation/error-proofing geometry",
+    ],
+  },
+  {
+    id: "nordson-result",
+    eyebrow: "05 / Testing Iteration",
+    title: "Failures → clean rows",
+    summary: "When the droplets did not dispense cleanly, I traced it to surface cleanliness, z-height, and pressure sensitivity, then adjusted the setup until the rows looked consistent.",
+    bullets: [
+      "Attempt 1: ~70% visible success",
+      "Cleaned sample surface",
+      "Adjusted z-height to 82.5",
+      "Attempt 2: no visible dispense failures",
     ],
     metrics: [
-      { label: "Early tray", value: "10 slots" },
+      { label: "Pressure", value: "52 kPa" },
+      { label: "Dispense time", value: "0.05 s" },
+    ],
+  },
+  {
+    id: "nordson-scale-up",
+    eyebrow: "06 / Scale-Up",
+    title: "Scale inside travel",
+    summary: "Scaling past 100 slots was exciting until the robot/table envelope became the limit. The larger concept did not fit the physical setup, so I reduced it to 178 slots.",
+    bullets: [
+      "261-slot concept exceeded travel",
+      "Robot hit the lab wall before full extension",
+      "178-slot tray fit usable motion",
+    ],
+    metrics: [
+      { label: "Validated run", value: "100 positions" },
       { label: "Scaled tray", value: "178 slots" },
     ],
   },
   {
     id: "nordson-shrinkage",
-    eyebrow: "06 / Print Shrinkage",
-    title: "Large print shrinkage measured",
-    summary: "The tray printed 3.12 mm short; next print scales XY to compensate.",
+    eyebrow: "07 / Print Shrinkage",
+    title: "Shrinkage measured",
+    summary: "The 178-slot FDM tray printed shorter than CAD, which surprised me. I measured the shrinkage, calculated XY compensation, and started looking at resin or outsourced manufacturing for the next version.",
     bullets: [
-      "CAD: 354.25 mm",
-      "Print: 351.13 mm",
-      "Next XY scale: 100.89%",
+      "CAD target: 354.25 mm",
+      "Printed length: 351.13 mm",
+      "Calculated XY scale: 100.89%",
     ],
     metrics: [
       { label: "CAD target", value: "354.25 mm" },
       { label: "Printed length", value: "351.13 mm" },
       { label: "Error", value: "-3.12 mm" },
-      { label: "Next XY scale", value: "100.89%" },
-    ],
-  },
-  {
-    id: "nordson-result",
-    eyebrow: "07 / Result",
-    title: "Workflow validated with water",
-    summary: "The fixture and calibration path were ready for real-fluid follow-up.",
-    bullets: [
-      "Water workflow validated",
-      "Repeatability improved",
-      "Real-fluid test remains next",
+      { label: "XY compensation", value: "100.89%" },
     ],
   },
 ];
 
 const nordsonVideoSlots: VideoSlot[] = [
   {
-    title: "Robot motion",
-    note: "Add dispensing path / stage movement clip",
-    callouts: ["Robot path", "Tray indexing"],
+    title: "100-position dispense run",
+    note: "Robot motion, tray indexing, repeatable dispense.",
+    src: "/nordson-100-dispense.mp4",
+    caption: "Automated 100-position dispense sequence",
+    callouts: ["100-position run", "Hands-free sequence", "Repeatable dispense"],
   },
   {
-    title: "Fixture loading",
-    note: "Add tray loading or datum fit-check clip",
-    callouts: ["Custom tray", "Repeatable datum"],
-  },
-  {
-    title: "Droplet test",
-    note: "Add close-up dispense calibration clip",
-    callouts: ["5 µL target", "Pressure sweep"],
+    title: "Slow-motion droplet",
+    note: "Close-up proof of clean droplet formation.",
+    src: "/IMG_6773.mp4",
+    caption: "Slow-motion droplet formation",
+    callouts: ["Clean droplet", "5 µL target", "Close-up validation"],
   },
 ];
 
@@ -233,7 +213,7 @@ const otherProjects: Project[] = [
       type: "image",
       src: "/turret-overview.png",
       alt: "Direct-drive turret overview",
-      caption: "Old pulley system in the robot system",
+      caption: "Original belt-drive turret layout",
       contain: true,
       callouts: [
         "2:1 belt path removed",
@@ -260,18 +240,18 @@ const otherProjects: Project[] = [
     ],
     evidence: [
       {
-        type: "image",
-        src: "/direct-drive-assembly.png",
-        alt: "Direct-drive turret assembly CAD",
-        caption: "Assembly view showing the direct-drive packaging and mount stack",
+      type: "image",
+      src: "/direct-drive-assembly.png",
+      alt: "Direct-drive turret assembly CAD",
+      caption: "Direct-drive motor mount and bearing stack",
         contain: true,
         callouts: ["Direct-drive assembly", "Mount stack", "Slip-ring clearance"],
       },
       {
         type: "image",
-        src: "/integrated-robot.png",
-        alt: "Integrated robot with turret",
-        caption: "Turret system installed on the robot platform",
+      src: "/integrated-robot.png",
+      alt: "Integrated robot with turret",
+      caption: "Turret integrated on the robot platform",
         callouts: ["Subsystem integrated", "Service access improved"],
       },
     ],
@@ -303,7 +283,7 @@ const otherProjects: Project[] = [
     hero: {
       type: "video",
       src: "/Test.mp4",
-      caption: "Shakedown flight used to validate structure, controls, and power",
+      caption: "Shakedown flight validation",
       callouts: [
         "Structure validated",
         "Controls/power checked",
@@ -332,7 +312,7 @@ const otherProjects: Project[] = [
         type: "image",
         src: "/CAD.png",
         alt: "V-tail aircraft CAD layout",
-        caption: "CAD layout used to define the V-tail aircraft geometry",
+        caption: "V-tail aircraft CAD layout",
         contain: true,
         callouts: [
           "V-tail configuration",
@@ -344,7 +324,7 @@ const otherProjects: Project[] = [
         type: "image",
         src: "/Side.png",
         alt: "Aircraft side view",
-        caption: "Side view of the fabricated aircraft configuration",
+        caption: "Fabricated V-tail airframe",
         callouts: ["Fabricated airframe", "Flight-ready layout"],
       },
     ],
@@ -376,7 +356,7 @@ const otherProjects: Project[] = [
     hero: {
       type: "video",
       src: "/Action.mp4",
-      caption: "Competition robot operating during ball retrieval testing",
+      caption: "Ball retrieval test run",
       callouts: [
         "Friction drivetrain",
         "Double reverse four-bar",
@@ -405,7 +385,7 @@ const otherProjects: Project[] = [
         type: "image",
         src: "/CADR.png",
         alt: "Ball retrieval robot CAD assembly",
-        caption: "CAD assembly used to package the drivetrain and lift mechanism",
+        caption: "Drivetrain and lift mechanism CAD",
         contain: true,
         callouts: ["CAD assembly", "Friction drivetrain", "Lift mechanism"],
       },
@@ -419,9 +399,11 @@ const projectPreviews: ProjectPreview[] = [
     eyebrow: "Lab Automation",
     title: "Automated 5 µL Dispensing Workflow",
     media: {
+      type: "image",
       src: "/setup.jpg",
       alt: "Automated dispensing setup with robot stage, controller, CAD reference, and custom tray",
-      callouts: ["5 µL target", "Custom tray fixture"],
+      caption: "Automated dispensing setup",
+      callouts: ["5 µL target", "100-position run", "Custom tray fixture"],
     },
     signal: "10 → 178 slots",
     result: "Corrected the fixture, calibrated pressure, and scaled the tray.",
@@ -470,72 +452,6 @@ const projectPreviews: ProjectPreview[] = [
     tags: ["Mechanisms", "Laser Cutting", "Testing"],
   },
 ];
-
-const portfolioTags = [
-  "Mechanical Design",
-  "CAD",
-  "Prototyping",
-  "Testing",
-  "Manufacturing Support",
-  "Robotics",
-];
-
-const snapshotCards: SnapshotCard[] = [
-  {
-    title: "CAD ownership",
-    text: "Fixture layouts, drivetrain geometry, and CAD-ready assemblies.",
-  },
-  {
-    title: "Built hardware",
-    text: "3D printed, waterjet, laser-cut, and assembled prototypes.",
-  },
-  {
-    title: "Validation mindset",
-    text: "Measured, tested, tuned, and closed the loop.",
-  },
-];
-
-const skillCards: SkillCard[] = [
-  {
-    label: "CAD / DFM",
-    examples: "Nordson tray, turret mount, UAS layout",
-  },
-  {
-    label: "Testing",
-    examples: "Dispense calibration, flight test, competition runs",
-  },
-  {
-    label: "Robotics",
-    examples: "Turret, ball robot, Nordson robot workflow",
-  },
-  {
-    label: "Manufacturing",
-    examples: "3D printing, waterjet, laser cutting, vendor-ready thinking",
-  },
-];
-
-const nordsonSummaryCards = [
-  {
-    label: "Objective",
-    text: "Repeatable 5 µL dispensing across dense sensor arrays.",
-  },
-  {
-    label: "My contribution",
-    text: "Fixture logic, CAD correction, tray iterations, pressure calibration.",
-  },
-  {
-    label: "Result",
-    text: "Water-validated workflow scaled to 178 slots.",
-  },
-];
-
-function Tag({ children }: { children: ReactNode }) {
-  return (
-    <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs font-medium text-gray-200">
-      {children}
-    </span>
-  );
-}
 
 function MetricCard({ label, value }: Metric) {
   return (
@@ -601,18 +517,6 @@ function PreviewMedia({ item }: { item: Media }) {
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-      {item.callouts && item.callouts.length > 0 && (
-        <div className="absolute left-4 top-4 flex max-w-[88%] flex-wrap gap-2">
-          {item.callouts.map((callout) => (
-            <span
-              key={callout}
-              className="rounded-full border border-white/15 bg-black/55 px-3 py-1 text-xs font-medium text-white shadow-lg backdrop-blur"
-            >
-              {callout}
-            </span>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
@@ -652,19 +556,6 @@ function MediaCard({
           />
         )}
 
-        {item.callouts && item.callouts.length > 0 && (
-          <div className="absolute left-5 top-5 flex max-w-[85%] flex-wrap gap-2">
-            {item.callouts.map((callout) => (
-              <span
-                key={callout}
-                className="rounded-full border border-white/15 bg-black/55 px-3 py-1 text-xs font-medium text-white shadow-lg backdrop-blur"
-              >
-                {callout}
-              </span>
-            ))}
-          </div>
-        )}
-
         {item.caption && (
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent px-6 pb-5 pt-20">
             <p className="text-base text-gray-200 md:text-lg">
@@ -679,27 +570,30 @@ function MediaCard({
 
 function VideoPlaceholder({ slot }: { slot: VideoSlot }) {
   return (
-    <div className="group overflow-hidden rounded-[1.5rem] border border-dashed border-white/15 bg-white/[0.025]">
-      <div className="relative flex h-56 items-center justify-center bg-black/25">
-        <div className="absolute left-4 top-4 flex flex-wrap gap-2">
-          {slot.callouts.map((callout) => (
-            <span
-              key={callout}
-              className="rounded-full border border-white/15 bg-black/55 px-3 py-1 text-xs font-medium text-white shadow-lg backdrop-blur"
-            >
-              {callout}
-            </span>
-          ))}
-        </div>
+    <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/20">
+      <div className="relative h-80 bg-black/30 md:h-[420px]">
+        <video
+          src={slot.src}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          className="h-full w-full object-cover"
+        />
 
-        <div className="flex h-16 w-16 items-center justify-center rounded-full border border-blue-300/25 bg-blue-400/10 text-2xl text-blue-200 transition group-hover:scale-105">
-          ▶
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+        <div className="absolute bottom-4 left-5 right-5">
+          <h4 className="text-xl font-semibold tracking-tight text-white">
+            {slot.title}
+          </h4>
+          <p className="mt-1 text-sm text-gray-300">{slot.caption}</p>
         </div>
       </div>
 
       <div className="p-5">
-        <h4 className="text-lg font-semibold text-white">{slot.title}</h4>
-        <p className="mt-2 text-sm leading-6 text-gray-400">{slot.note}</p>
+        <p className="text-sm leading-6 text-gray-400">{slot.note}</p>
       </div>
     </div>
   );
@@ -727,88 +621,155 @@ function VisualShell({
   );
 }
 
-function MeasurementRow({
-  label,
-  value,
-  tone,
+function InlineMedia({
+  item,
+  className = "h-72 md:h-80",
 }: {
-  label: string;
-  value: string;
-  tone: "red" | "blue";
+  item: Media;
+  className?: string;
 }) {
-  const isRed = tone === "red";
-
   return (
-    <div
-      className={`rounded-2xl border p-4 ${
-        isRed
-          ? "border-red-300/25 bg-red-400/[0.055]"
-          : "border-blue-300/25 bg-blue-400/[0.07]"
-      }`}
-    >
-      <div
-        className={`mb-5 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.16em] ${
-          isRed ? "text-red-200" : "text-blue-200"
-        }`}
-      >
-        <span>{label}</span>
-        <span
-          className={`rounded-full border px-3 py-1 normal-case tracking-normal ${
-            isRed
-              ? "border-red-300/25 bg-red-400/10"
-              : "border-blue-300/25 bg-blue-400/10"
-          }`}
-        >
-          {value}
-        </span>
-      </div>
-      <div className="flex items-center gap-4">
-        <div className="h-10 w-10 rounded-full border-4 border-current opacity-80" />
-        <div className="h-px flex-1 bg-current opacity-60" />
-        <div className="text-lg font-semibold text-white">{value}</div>
-        <div className="h-px flex-1 bg-current opacity-60" />
-        <div className="h-10 w-10 rounded-full border-4 border-current opacity-80" />
+    <div className="group overflow-hidden rounded-2xl border border-white/10 bg-black/25">
+      <div className={`relative w-full ${className}`}>
+        {item.type === "video" ? (
+          <video
+            src={item.src}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]"
+          />
+        ) : (
+          <Image
+            src={item.src}
+            alt={item.alt ?? item.caption ?? "Nordson project media"}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className={`transition duration-500 group-hover:scale-[1.025] ${
+              item.contain ? "object-contain p-3" : "object-cover"
+            }`}
+          />
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+
+        {item.caption && (
+          <div className="absolute inset-x-0 bottom-0 px-4 pb-3 pt-12">
+            <p className="text-xs font-medium text-gray-100">{item.caption}</p>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-function CadRealityVisual() {
+function EquationCard() {
   return (
-    <VisualShell
-      eyebrow="CAD vs Measured Hardware"
-      title="Reference geometry corrected around the real plate"
-    >
-      <div className="grid gap-4">
-        <MeasurementRow label="CAD assumption" value="40 mm" tone="red" />
-        <MeasurementRow label="Measured hardware" value="38 mm" tone="blue" />
+    <div className="rounded-2xl border border-blue-300/20 bg-blue-400/[0.06] p-4">
+      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-200">
+        Interpolation result
+      </div>
+      <div className="mt-3 rounded-xl border border-white/10 bg-black/25 p-3 font-mono text-xs leading-6 text-gray-200">
+        P = 48 + ((5.0 - 4.6) / (5.3 - 4.6)) × (54 - 48)
+      </div>
+      <div className="mt-3 text-2xl font-semibold tracking-tight text-white">
+        ~51.4 kPa
+      </div>
+    </div>
+  );
+}
+
+function OverviewVisual() {
+  return (
+    <VisualShell eyebrow="System proof" title="Automated 100-position run">
+      <InlineMedia
+        className="h-80 md:h-[420px]"
+        item={{
+          type: "video",
+          src: "/nordson-100-dispense.mp4",
+          alt: "Automated 100-position Nordson dispense run",
+          caption: "Hands-free dispense sequence validating the tray workflow",
+          callouts: ["100-position run", "Step-and-repeat", "Hands-free"],
+        }}
+      />
+    </VisualShell>
+  );
+}
+
+function CalibrationEvidenceVisual() {
+  return (
+    <VisualShell eyebrow="Droplet mass calibration" title="Pressure sweep → 5 µL setting">
+      <div className="grid gap-3 md:grid-cols-3">
+        <InlineMedia
+          item={{
+            src: "/calibration-24kpa-2p9mg.png",
+            alt: "Scale showing 2.9 milligrams at 24 kilopascals",
+            caption: "24 kPa → 2.9 µL",
+            callouts: ["24 kPa", "2.9 µL"],
+          }}
+        />
+        <InlineMedia
+          item={{
+            src: "/calibration-48kpa-4p6mg.png",
+            alt: "Scale showing 4.6 milligrams at 48 kilopascals",
+            caption: "48 kPa → 4.6 µL",
+            callouts: ["48 kPa", "4.6 µL"],
+          }}
+        />
+        <InlineMedia
+          item={{
+            src: "/calibration-54kpa-5p3mg.png",
+            alt: "Scale showing 5.3 milligrams at 54 kilopascals",
+            caption: "54 kPa → 5.3 µL",
+            callouts: ["54 kPa", "5.3 µL"],
+          }}
+        />
+      </div>
+      <div className="mt-3 grid gap-3 md:grid-cols-[1fr_0.8fr]">
+        <CompactCalibrationPlot />
+        <EquationCard />
       </div>
     </VisualShell>
   );
 }
 
-function OverviewVisual() {
-  const steps = ["Tray", "Robot", "Pressure", "Water test"];
-
+function CadRealityVisual() {
   return (
-    <VisualShell eyebrow="System Flow" title="Fixture + robot + calibration">
-      <div className="grid gap-3 sm:grid-cols-4">
-        {steps.map((step, index) => (
-          <div
-            key={step}
-            className="relative rounded-2xl border border-white/10 bg-white/[0.04] p-4"
-          >
-            <div className="text-xs font-semibold text-blue-200">
-              {String(index + 1).padStart(2, "0")}
-            </div>
-            <div className="mt-5 text-sm font-semibold text-white">{step}</div>
-            {index < steps.length - 1 && (
-              <div className="absolute -right-3 top-1/2 hidden -translate-y-1/2 text-blue-200 sm:block">
-                →
-              </div>
-            )}
-          </div>
-        ))}
+    <VisualShell eyebrow="CAD vs measured hardware" title="40 mm reference became 38 mm real geometry">
+      <div className="grid gap-4 lg:grid-cols-2">
+        <InlineMedia
+          className="h-96 md:h-[520px]"
+          item={{
+            src: "/cad-reference-40mm.png",
+            alt: "CAD reference showing 40 millimeter hole spacing",
+            contain: true,
+            caption: "CAD reference: 40 mm",
+            callouts: ["CAD", "40 mm"],
+          }}
+        />
+        <InlineMedia
+          className="h-96 md:h-[520px]"
+          item={{
+            src: "/real-plate-38mm.png",
+            alt: "Measured real Nordson plate showing 38 millimeter hole spacing",
+            caption: "Measured hardware: 38 mm",
+            callouts: ["Real plate", "38 mm"],
+          }}
+        />
+      </div>
+      <div className="mt-4">
+        <InlineMedia
+          className="h-96 md:h-[520px]"
+          item={{
+            src: "/corrected-plate-38mm-sketch.png",
+            alt: "Corrected plate sketch showing 38 millimeter spacing",
+            contain: true,
+            caption: "Corrected model: 38 mm grid",
+            callouts: ["Corrected CAD", "Measured geometry"],
+          }}
+        />
       </div>
     </VisualShell>
   );
@@ -816,31 +777,67 @@ function OverviewVisual() {
 
 function FixtureVisual() {
   return (
-    <VisualShell eyebrow="Fixture Datum" title="Tray locates from fixed references">
-      <div className="rounded-2xl border border-blue-300/20 bg-blue-400/[0.06] p-5">
-        <div className="mb-4 flex items-center justify-between">
-          <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-200">
-            Sensor Tray
-          </div>
-          <div className="rounded-full border border-blue-300/20 px-3 py-1 text-xs font-semibold text-blue-100">
-            repeatable datum
-          </div>
-        </div>
+    <VisualShell eyebrow="Fixture design" title="Tray lock and hole pattern tied the design to the real plate">
+      <div className="grid gap-3 md:grid-cols-2">
+        <InlineMedia
+          className="h-80 md:h-[360px]"
+          item={{
+            src: "/corrected-plate-cad.png",
+            alt: "Nordson tray CAD with hole pattern",
+            contain: true,
+            caption: "Hole-pattern tray layout",
+            callouts: ["Plate interface", "Tray datum"],
+          }}
+        />
+        <InlineMedia
+          className="h-80 md:h-[360px]"
+          item={{
+            src: "/prong-lock-cad.png",
+            alt: "Prong lock CAD detail",
+            contain: true,
+            caption: "Prong-style locking detail",
+            callouts: ["Prong lock", "Repeatable fit"],
+          }}
+        />
+      </div>
+    </VisualShell>
+  );
+}
 
-        <div className="relative h-28 rounded-xl border border-white/10 bg-black/20">
-          <div className="absolute left-4 top-4 h-20 w-2 rounded-full bg-amber-300" />
-          <div className="absolute bottom-4 left-4 right-4 grid grid-cols-8 gap-2">
-            {Array.from({ length: 16 }).map((_, index) => (
-              <span
-                key={index}
-                className="h-2.5 rounded-full bg-blue-200/80"
-              />
-            ))}
-          </div>
-          <div className="absolute left-8 top-5 text-xs font-semibold text-amber-100">
-            fixed edge
-          </div>
-        </div>
+function TestingEvidenceVisual() {
+  return (
+    <VisualShell eyebrow="Real testing" title="Attempt 1 failures → Attempt 2 clean result">
+      <div className="grid gap-3 md:grid-cols-2">
+        <InlineMedia
+          className="h-80 md:h-[360px]"
+          item={{
+            src: "/dispense-attempt-1-failures.png",
+            alt: "Dispense attempt 1 with visible failures circled",
+            caption: "Attempt 1: visible row failures",
+            callouts: ["~70% success", "Failures marked"],
+          }}
+        />
+        <InlineMedia
+          className="h-80 md:h-[360px]"
+          item={{
+            src: "/dispense-attempt-2-success.png",
+            alt: "Dispense attempt 2 with aligned successful droplets",
+            caption: "Attempt 2: no visible dispense failures",
+            callouts: ["Cleaned surface", "Z-height adjusted"],
+          }}
+        />
+      </div>
+      <div className="mt-3">
+        <InlineMedia
+          className="h-80 md:h-[440px]"
+          item={{
+            type: "video",
+            src: "/IMG_6773.mp4",
+            alt: "Slow motion droplet dispense video",
+            caption: "Slow-motion droplet formation",
+            callouts: ["Slow motion", "Clean droplet", "Close-up validation"],
+          }}
+        />
       </div>
     </VisualShell>
   );
@@ -848,19 +845,31 @@ function FixtureVisual() {
 
 function ScaleVisual() {
   return (
-    <VisualShell eyebrow="Travel Envelope" title="178 slots kept inside usable motion">
-      <div className="relative h-44 rounded-2xl border border-white/10 bg-black/20 p-5">
-        <div className="absolute inset-5 rounded-xl border border-blue-300/30 bg-blue-400/[0.04]" />
-        <div className="absolute left-8 top-8 h-24 w-[54%] rounded-lg border-2 border-blue-300 bg-blue-400/10" />
-        <div className="absolute right-8 top-12 h-20 w-[30%] rounded-lg border-2 border-dashed border-red-300/70 bg-red-400/10" />
-        <div className="absolute left-10 top-11 text-xs font-semibold text-blue-100">
-          178-slot tray
-        </div>
-        <div className="absolute right-12 top-16 text-xs font-semibold text-red-100">
-          oversized
-        </div>
-        <div className="absolute bottom-7 left-[35%] -translate-x-1/2 rounded-full border border-white/10 bg-black/40 px-3 py-1 text-xs font-semibold text-gray-200">
-          usable robot travel
+    <VisualShell eyebrow="Scale-up" title="100-position validation → 178-slot tray scale-up">
+      <div className="grid gap-3 md:grid-cols-2">
+        <InlineMedia
+          className="h-80 md:h-[420px]"
+          item={{
+            src: "/tray-178-cad.png",
+            alt: "178-slot tray CAD layout",
+            contain: true,
+            caption: "178-slot tray CAD",
+            callouts: ["178 slots", "Usable travel"],
+          }}
+        />
+        <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-300">
+            Constraint
+          </div>
+          <p className="mt-3 text-sm leading-6 text-gray-300">
+            A larger 261-slot concept used the plate area, but the robot reached
+            the physical lab wall before full extension. The 178-slot tray kept
+            the scale-up inside usable machine travel.
+          </p>
+          <div className="mt-5 grid gap-3">
+            <MetricCard label="Validated video" value="100 positions" />
+            <MetricCard label="Scaled tray" value="178 slots" />
+          </div>
         </div>
       </div>
     </VisualShell>
@@ -869,37 +878,40 @@ function ScaleVisual() {
 
 function ShrinkageVisual() {
   return (
-    <VisualShell eyebrow="Print Shrinkage" title="Measured shrinkage → compensation scale">
-      <div className="grid gap-3">
-        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-          <div className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">
-            CAD target
+    <VisualShell eyebrow="Manufacturing correction" title="Problem photo + correction calculation">
+      <div className="grid gap-3 md:grid-cols-[1.1fr_0.9fr]">
+        <InlineMedia
+          className="h-80 md:h-[440px]"
+          item={{
+            src: "/tray-178-printed-shrinkage-gap.png",
+            alt: "Printed 178-slot tray showing shrinkage gap",
+            caption: "Printed tray gap showed shrinkage from CAD target",
+            callouts: ["Printed tray", "Shrinkage gap"],
+          }}
+        />
+        <div className="rounded-2xl border border-amber-300/20 bg-amber-400/[0.055] p-5">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-amber-200">
+            Calculation
           </div>
-          <div className="h-3 w-full rounded-full bg-blue-300" />
-          <div className="mt-2 text-lg font-semibold text-white">354.25 mm</div>
-        </div>
-        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-          <div className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">
-            Printed tray
-          </div>
-          <div className="h-3 w-[88%] rounded-full bg-amber-300" />
-          <div className="mt-2 flex items-center justify-between gap-3">
-            <span className="text-lg font-semibold text-white">351.13 mm</span>
-            <span className="rounded-full border border-amber-300/25 bg-amber-400/10 px-3 py-1 text-xs font-semibold text-amber-100">
-              -3.12 mm
-            </span>
-          </div>
-        </div>
-        <div className="rounded-2xl border border-blue-300/20 bg-blue-400/[0.06] p-4">
-          <div className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-blue-200">
-            Next print compensation
-          </div>
-          <div className="flex items-end justify-between gap-4">
-            <div className="text-3xl font-semibold tracking-tight text-white">
-              100.89%
+          <div className="mt-4 grid gap-3 text-sm text-gray-200">
+            <div className="flex justify-between gap-4 border-b border-white/10 pb-2">
+              <span>CAD target</span>
+              <strong>354.25 mm</strong>
             </div>
-            <div className="rounded-full border border-blue-300/25 bg-blue-400/10 px-3 py-1 text-xs font-semibold text-blue-100">
-              scale XY up
+            <div className="flex justify-between gap-4 border-b border-white/10 pb-2">
+              <span>Printed length</span>
+              <strong>351.13 mm</strong>
+            </div>
+            <div className="flex justify-between gap-4 border-b border-white/10 pb-2">
+              <span>Shrinkage</span>
+              <strong>3.12 mm</strong>
+            </div>
+            <div className="rounded-xl border border-white/10 bg-black/25 p-3 font-mono text-xs">
+              354.25 / 351.13 = 1.0089
+            </div>
+            <div className="flex items-end justify-between gap-4">
+              <span className="text-gray-300">XY compensation</span>
+              <strong className="text-3xl tracking-tight text-white">100.89%</strong>
             </div>
           </div>
         </div>
@@ -909,33 +921,7 @@ function ShrinkageVisual() {
 }
 
 function ResultVisual() {
-  const items = [
-    "Water workflow validated",
-    "Repeatability improved",
-    "Real-fluid test next",
-  ];
-
-  return (
-    <VisualShell eyebrow="Validation Status" title="Validated path, clear next step">
-      <div className="grid gap-3">
-        {items.map((item, index) => (
-          <div
-            key={item}
-            className={`flex items-center gap-3 rounded-2xl border p-4 ${
-              index < 2
-                ? "border-emerald-300/20 bg-emerald-400/[0.06]"
-                : "border-amber-300/20 bg-amber-400/[0.06]"
-            }`}
-          >
-            <span className="flex h-7 w-7 items-center justify-center rounded-full border border-white/15 text-sm font-semibold text-white">
-              {index < 2 ? "✓" : "→"}
-            </span>
-            <span className="text-sm font-semibold text-gray-200">{item}</span>
-          </div>
-        ))}
-      </div>
-    </VisualShell>
-  );
+  return <TestingEvidenceVisual />;
 }
 
 function CompactCalibrationPlot() {
@@ -961,186 +947,160 @@ function CompactCalibrationPlot() {
     .join(" ");
 
   return (
-    <VisualShell eyebrow="Calibration Plot" title="~51.4 kPa for 5 µL">
-      <div className="rounded-2xl bg-black/20 p-3">
-        <svg
-          viewBox={`0 0 ${width} ${height}`}
-          role="img"
-          aria-label="Interpolation plot estimating 51.4 kilopascals for a 5 microliter dispense target"
-          className="h-auto w-full"
-        >
-            <rect width={width} height={height} rx="18" fill="#111827" />
+    <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        role="img"
+        aria-label="Interpolation plot estimating 51.4 kilopascals for a 5 microliter dispense target"
+        className="h-auto w-full"
+      >
+        <rect width={width} height={height} rx="18" fill="#111827" />
 
-            {xTicks.map((tick) => (
-              <g key={tick}>
-                <line
-                  x1={x(tick)}
-                  x2={x(tick)}
-                  y1={plot.top}
-                  y2={plot.top + plot.height}
-                  stroke="#334155"
-                  strokeWidth="1"
-                  opacity="0.65"
-                />
-                <text
-                  x={x(tick)}
-                  y={plot.top + plot.height + 28}
-                  textAnchor="middle"
-                  fill="#a8b0bf"
-                  fontSize="12"
-                  fontWeight="600"
-                >
-                  {tick}
-                </text>
-              </g>
-            ))}
-
-            {yTicks.map((tick) => (
-              <g key={tick}>
-                <line
-                  x1={plot.left}
-                  x2={plot.left + plot.width}
-                  y1={y(tick)}
-                  y2={y(tick)}
-                  stroke="#334155"
-                  strokeWidth="1"
-                  strokeDasharray={tick === 5 ? "10 10" : "6 12"}
-                  opacity={tick === 5 ? "0.95" : "0.65"}
-                />
-                <text
-                  x={plot.left - 22}
-                  y={y(tick) + 6}
-                  textAnchor="end"
-                  fill="#a8b0bf"
-                  fontSize="12"
-                  fontWeight="600"
-                >
-                  {tick.toFixed(1)}
-                </text>
-              </g>
-            ))}
-
+        {xTicks.map((tick) => (
+          <g key={tick}>
             <line
-              x1={plot.left}
+              x1={x(tick)}
+              x2={x(tick)}
               y1={plot.top}
-              x2={plot.left}
               y2={plot.top + plot.height}
-              stroke="#64748b"
-              strokeWidth="1.5"
+              stroke="#334155"
+              strokeWidth="1"
+              opacity="0.65"
             />
+            <text
+              x={x(tick)}
+              y={plot.top + plot.height + 28}
+              textAnchor="middle"
+              fill="#a8b0bf"
+              fontSize="12"
+              fontWeight="600"
+            >
+              {tick}
+            </text>
+          </g>
+        ))}
+
+        {yTicks.map((tick) => (
+          <g key={tick}>
             <line
               x1={plot.left}
-              y1={plot.top + plot.height}
               x2={plot.left + plot.width}
-              y2={plot.top + plot.height}
-              stroke="#64748b"
-              strokeWidth="1.5"
+              y1={y(tick)}
+              y2={y(tick)}
+              stroke="#334155"
+              strokeWidth="1"
+              strokeDasharray={tick === 5 ? "10 10" : "6 12"}
+              opacity={tick === 5 ? "0.95" : "0.65"}
             />
+            <text
+              x={plot.left - 22}
+              y={y(tick) + 6}
+              textAnchor="end"
+              fill="#a8b0bf"
+              fontSize="12"
+              fontWeight="600"
+            >
+              {tick.toFixed(1)}
+            </text>
+          </g>
+        ))}
 
-            <line
-              x1={plot.left}
-              x2={x(target.pressure)}
-              y1={y(target.volume)}
-              y2={y(target.volume)}
-              stroke="#fbbf24"
-              strokeWidth="2.5"
-              strokeDasharray="7 7"
-            />
-            <line
-              x1={x(target.pressure)}
-              x2={x(target.pressure)}
-              y1={y(target.volume)}
-              y2={plot.top + plot.height}
-              stroke="#fbbf24"
-              strokeWidth="2.5"
-              strokeDasharray="7 7"
-            />
+        <line
+          x1={plot.left}
+          y1={plot.top}
+          x2={plot.left}
+          y2={plot.top + plot.height}
+          stroke="#64748b"
+          strokeWidth="1.5"
+        />
+        <line
+          x1={plot.left}
+          y1={plot.top + plot.height}
+          x2={plot.left + plot.width}
+          y2={plot.top + plot.height}
+          stroke="#64748b"
+          strokeWidth="1.5"
+        />
 
-            <polyline
-              points={linePoints}
-              fill="none"
-              stroke="#4f80bd"
-              strokeWidth="3"
-            />
+        <line
+          x1={plot.left}
+          x2={x(target.pressure)}
+          y1={y(target.volume)}
+          y2={y(target.volume)}
+          stroke="#fbbf24"
+          strokeWidth="2.5"
+          strokeDasharray="7 7"
+        />
+        <line
+          x1={x(target.pressure)}
+          x2={x(target.pressure)}
+          y1={y(target.volume)}
+          y2={plot.top + plot.height}
+          stroke="#fbbf24"
+          strokeWidth="2.5"
+          strokeDasharray="7 7"
+        />
 
-            {data.map((point) => (
-              <g key={point.label}>
-                <circle
-                  cx={x(point.pressure)}
-                  cy={y(point.volume)}
-                  r="6"
-                  fill="#60a5fa"
-                  stroke="white"
-                  strokeWidth="3"
-                />
-                <text
-                  x={x(point.pressure) + 12}
-                  y={y(point.volume) - 12}
-                  fill="#e5e7eb"
-                  fontSize="12"
-                  fontWeight="700"
-                >
-                  {point.label}
-                </text>
-              </g>
-            ))}
+        <polyline
+          points={linePoints}
+          fill="none"
+          stroke="#4f80bd"
+          strokeWidth="3"
+        />
 
+        {data.map((point) => (
+          <g key={point.label}>
             <circle
-              cx={x(target.pressure)}
-              cy={y(target.volume)}
-              r="7"
-              fill="#fbbf24"
+              cx={x(point.pressure)}
+              cy={y(point.volume)}
+              r="6"
+              fill="#60a5fa"
               stroke="white"
               strokeWidth="3"
             />
             <text
-              x={x(target.pressure) + 15}
-              y={y(target.volume) - 14}
+              x={x(point.pressure) + 12}
+              y={y(point.volume) - 12}
               fill="#e5e7eb"
               fontSize="12"
-              fontWeight="800"
+              fontWeight="700"
             >
-              {target.label}
+              {point.label}
             </text>
+          </g>
+        ))}
 
-            <text
-              x={plot.left + plot.width / 2}
-              y={height - 20}
-              textAnchor="middle"
-              fill="#c7ced9"
-              fontSize="13"
-              fontWeight="700"
-            >
-              Pressure (kPa)
-            </text>
-            <text
-              x="16"
-              y={plot.top + plot.height / 2}
-              textAnchor="middle"
-              fill="#c7ced9"
-              fontSize="13"
-              fontWeight="700"
-              transform={`rotate(-90 16 ${plot.top + plot.height / 2})`}
-            >
-              Estimated volume (µL)
-            </text>
-          </svg>
-      </div>
-      <div className="mt-3 rounded-2xl border border-blue-300/20 bg-blue-400/10 p-3 text-sm font-semibold text-blue-100">
-        48 kPa → 4.6 µL, 54 kPa → 5.3 µL, target → ~51.4 kPa
-      </div>
-    </VisualShell>
+        <circle
+          cx={x(target.pressure)}
+          cy={y(target.volume)}
+          r="7"
+          fill="#fbbf24"
+          stroke="white"
+          strokeWidth="3"
+        />
+        <text
+          x={x(target.pressure) + 15}
+          y={y(target.volume) - 14}
+          fill="#e5e7eb"
+          fontSize="12"
+          fontWeight="800"
+        >
+          {target.label}
+        </text>
+      </svg>
+    </div>
   );
 }
 
 function NordsonChapterVisual({ id }: { id: string }) {
   if (id === "nordson-overview") return <OverviewVisual />;
+  if (id === "nordson-calibration") return <CalibrationEvidenceVisual />;
   if (id === "nordson-cad-vs-reality") return <CadRealityVisual />;
   if (id === "nordson-fixture-design") return <FixtureVisual />;
-  if (id === "nordson-calibration") return <CompactCalibrationPlot />;
+  if (id === "nordson-result") return <TestingEvidenceVisual />;
   if (id === "nordson-scale-up") return <ScaleVisual />;
   if (id === "nordson-shrinkage") return <ShrinkageVisual />;
-  return <ResultVisual />;
+  return <OverviewVisual />;
 }
 
 function SideMenu() {
@@ -1232,34 +1192,6 @@ function MobileJumpMenu() {
   );
 }
 
-function PortfolioSnapshot() {
-  return (
-    <section className="mb-16">
-      <div className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
-        Portfolio Snapshot
-      </div>
-
-      <div className="mb-5 flex flex-wrap gap-2">
-        {portfolioTags.map((item) => (
-          <Tag key={item}>{item}</Tag>
-        ))}
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-3">
-        {snapshotCards.map((item) => (
-          <div
-            key={item.title}
-            className="rounded-2xl border border-white/10 bg-white/[0.035] p-5"
-          >
-            <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-            <p className="mt-3 text-sm leading-6 text-gray-400">{item.text}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function ProjectGallery() {
   return (
     <section className="mb-20">
@@ -1268,15 +1200,7 @@ function ProjectGallery() {
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
             Project Gallery
           </div>
-
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            Visual proof first, details after
-          </h2>
         </div>
-
-        <p className="max-w-xl text-sm leading-6 text-gray-400 md:text-right">
-          Four builds. Real hardware. Measured outcomes.
-        </p>
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
@@ -1293,51 +1217,14 @@ function ProjectGallery() {
                 {project.eyebrow}
               </div>
 
-              <div className="mt-3 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+              <div className="mt-3">
                 <h3 className="text-2xl font-semibold tracking-tight text-white">
                   {project.title}
                 </h3>
-
-                <div className="shrink-0 rounded-full border border-white/10 bg-black/25 px-3 py-1 text-xs font-semibold text-gray-200">
-                  {project.signal}
-                </div>
               </div>
 
-              <p className="mt-3 text-sm leading-6 text-gray-400">
-                {project.result}
-              </p>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <Tag key={`${project.id}-${tag}`}>{tag}</Tag>
-                ))}
-              </div>
             </div>
           </a>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function SkillIndex() {
-  return (
-    <section className="mb-16">
-      <div className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
-        Skill Index
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-4">
-        {skillCards.map((skill) => (
-          <div
-            key={skill.label}
-            className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
-          >
-            <div className="font-semibold text-white">{skill.label}</div>
-            <p className="mt-3 text-sm leading-6 text-gray-400">
-              {skill.examples}
-            </p>
-          </div>
         ))}
       </div>
     </section>
@@ -1358,22 +1245,11 @@ function ChapterSection({ chapter }: { chapter: Chapter }) {
           {chapter.title}
         </h3>
 
-        <p className="mt-4 text-sm leading-6 text-gray-300">
+        <p className="mt-4 max-w-5xl text-sm leading-6 text-gray-300 md:text-base md:leading-7">
           {chapter.summary}
         </p>
 
         <NordsonChapterVisual id={chapter.id} />
-
-        <div className="mt-5 flex flex-wrap gap-2">
-          {chapter.bullets.map((bullet) => (
-            <span
-              key={bullet}
-              className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs font-medium text-gray-300"
-            >
-              {bullet}
-            </span>
-          ))}
-        </div>
 
         {chapter.metrics && (
           <div className="mt-auto grid grid-cols-2 gap-x-5 gap-y-3 border-t border-white/10 pt-5">
@@ -1420,87 +1296,35 @@ function FeaturedNordsonCaseStudy() {
             "Automated dispensing setup with custom tray, robot stage, and controller",
           callouts: [
             "5 µL target",
-            "Custom tray fixture",
+            "100-position run",
             "Robot + dispense controller",
           ],
         }}
         priority
         hero
-        className="h-[440px] md:h-[620px]"
+        className="h-[500px] md:h-[720px]"
       />
-
-      <div className="mt-8 grid gap-4 md:grid-cols-3">
-        {nordsonSummaryCards.map((item) => (
-          <div
-            key={item.label}
-            className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-5"
-          >
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-300/35 to-transparent" />
-            <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-300">
-              {item.label}
-            </div>
-            <p className="mt-3 text-sm leading-6 text-gray-300">{item.text}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-8 grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.045] p-7">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-300/35 to-transparent" />
-
-          <p className="text-base leading-7 text-gray-300">
-            CAD mismatch → corrected fixture → calibrated pressure → scaled tray.
-          </p>
-
-          <div className="mt-6 flex flex-wrap gap-2">
-            {nordsonTags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-          {nordsonMetrics.map((metric) => (
-            <MetricCard key={metric.label} {...metric} />
-          ))}
-        </div>
-      </div>
 
       <div className="mt-8">
         <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
-              Video Slots
+              Validation Videos
             </div>
             <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">
-              Nordson clips 
+              Dispense proof
             </h3>
           </div>
-          <p className="max-w-lg text-sm leading-6 text-gray-400 md:text-right">
-            Coming Soon 
-          </p>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2">
           {nordsonVideoSlots.map((slot) => (
             <VideoPlaceholder key={slot.title} slot={slot} />
           ))}
         </div>
       </div>
 
-      <div className="mt-12 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-        <div>
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
-            Engineering Notes
-          </div>
-
-          <h3 className="mt-3 text-3xl font-semibold tracking-tight text-white">
-            Key decisions and proof points
-          </h3>
-        </div>
-      </div>
-
-      <div className="mt-6 grid items-stretch gap-4 lg:grid-cols-2">
+      <div className="mt-12 grid items-stretch gap-8">
         {nordsonChapters.map((chapter) => (
           <ChapterSection key={chapter.id} chapter={chapter} />
         ))}
@@ -1540,17 +1364,7 @@ function CompactProjectSection({
           <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.045] p-7">
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-300/35 to-transparent" />
 
-            <p className="text-base leading-7 text-gray-300">
-              {project.summary}
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <Tag key={tag}>{tag}</Tag>
-              ))}
-            </div>
-
-            <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
               {project.metrics.map((metric) => (
                 <MetricCard key={metric.label} {...metric} />
               ))}
@@ -1614,9 +1428,7 @@ export default function ProjectsPage() {
           </header>
 
           <MobileJumpMenu />
-          <PortfolioSnapshot />
           <ProjectGallery />
-          <SkillIndex />
 
           <FeaturedNordsonCaseStudy />
 

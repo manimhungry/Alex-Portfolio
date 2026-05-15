@@ -26,6 +26,15 @@ type FeaturedLink = {
   href: string;
 };
 
+type ProofImage = {
+  type?: "image" | "video";
+  src: string;
+  alt: string;
+  label: string;
+  href: string;
+  contain?: boolean;
+};
+
 const headerLinks: ContactLink[] = [
   { label: "Resume", href: "/Resume.pdf", external: true },
   {
@@ -44,7 +53,7 @@ const heroButtons: HeroButton[] = [
     primary: true,
   },
   {
-    label: "Experience",
+    label: "Experience / Internships",
     href: "/experience",
   },
 ];
@@ -64,9 +73,32 @@ const featuredLinks: FeaturedLink[] = [
   },
   {
     eyebrow: "Leica",
-    title: "Leica Biosystems",
+    title: "Experience / Internships",
     text: "CAD/BOM recovery, manufacturing support, and verification on production hardware.",
     href: "/experience",
+  },
+];
+
+const proofImages: ProofImage[] = [
+  {
+    src: "/setup.jpg",
+    alt: "Automated dispensing setup with robot stage and custom tray",
+    label: "Nordson fixture workflow",
+    href: "/projects#nordson",
+  },
+  {
+    src: "/direct-drive-assembly.png",
+    alt: "Direct-drive turret CAD assembly",
+    label: "Direct-drive turret CAD",
+    href: "/projects#direct-drive-turret",
+    contain: true,
+  },
+  {
+    type: "video",
+    src: "/Final_Gif.mov",
+    alt: "Leica hardware work video",
+    label: "Leica hardware work",
+    href: "/experience#cs2-cad-recovery",
   },
 ];
 
@@ -125,6 +157,46 @@ function FeaturedCard({ item }: { item: FeaturedLink }) {
   );
 }
 
+function ProofImageCard({ item, featured = false }: { item: ProofImage; featured?: boolean }) {
+  return (
+    <Link
+      href={item.href}
+      className={`group overflow-hidden rounded-3xl border border-white/10 bg-black/30 shadow-2xl shadow-black/25 transition hover:-translate-y-1 hover:border-blue-200/30 ${
+        featured ? "md:col-span-2" : ""
+      }`}
+    >
+      <div className={featured ? "relative h-72 md:h-[390px]" : "relative h-56 md:h-[250px]"}>
+        {item.type === "video" ? (
+          <video
+            src={item.src}
+            aria-label={item.alt}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]"
+          />
+        ) : (
+          <Image
+            src={item.src}
+            alt={item.alt}
+            fill
+            sizes={featured ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 100vw, 25vw"}
+            className={`transition duration-500 group-hover:scale-[1.025] ${
+              item.contain ? "object-contain p-5" : "object-cover"
+            }`}
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+        <div className="absolute bottom-4 left-4 right-4 text-sm font-semibold text-white">
+          {item.label}
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 export default function Home() {
   return (
     <main id="main" className="relative min-h-screen overflow-hidden text-white">
@@ -165,26 +237,45 @@ export default function Home() {
           </div>
         </header>
 
-        <section className="flex flex-1 items-center justify-center px-6 py-20 text-center md:px-10">
-          <div className="mx-auto max-w-5xl">
-            <h2 className="text-5xl font-bold tracking-tight text-white md:text-7xl">
-              Design. Build. Validate.
-            </h2>
+        <section className="flex flex-1 items-center px-6 py-16 md:px-10">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div className="text-left">
+              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">
+                About Me
+              </div>
 
-            <p className="mx-auto mt-6 max-w-2xl rounded-2xl border border-white/10 bg-black/25 px-5 py-3 text-base leading-relaxed text-gray-200 shadow-2xl shadow-black/20 backdrop-blur-md md:text-lg">
-              Mechanical design from CAD to prototype to verification.
-            </p>
+              <h2 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-white md:text-6xl">
+                Hi, I&apos;m Alex.
+              </h2>
 
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              {heroButtons.map((item) => (
-                <HeroCTA key={item.label} item={item} />
-              ))}
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-200 md:text-xl">
+                I&apos;m from Escondido, California. I&apos;ve always loved science, math, and watching my dad solve practical problems with care.
+              </p>
+
+              <p className="mt-4 max-w-2xl text-base leading-7 text-gray-300 md:text-lg">
+                I&apos;m a Mechanical Engineering student at UC San Diego graduating in December 2026. I design, test, and validate hardware through the Wang Lab, Triton Robotics, and my hardware engineering internship at Leica Biosystems.
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                {heroButtons.map((item) => (
+                  <HeroCTA key={item.label} item={item} />
+                ))}
+              </div>
             </div>
 
-            <div className="mx-auto mt-14 grid max-w-4xl gap-4 md:grid-cols-3">
-              {featuredLinks.map((item) => (
-                <FeaturedCard key={item.href} item={item} />
-              ))}
+            <div>
+              <div className="grid gap-4 md:grid-cols-2">
+                <ProofImageCard item={proofImages[0]} featured />
+                {proofImages.slice(1).map((item) => (
+                  <ProofImageCard key={item.href} item={item} />
+                ))}
+              </div>
+
+              <div className="mt-5 grid gap-4 md:grid-cols-3">
+                {featuredLinks.map((item) => (
+                  <FeaturedCard key={item.href} item={item} />
+                ))}
+              </div>
             </div>
           </div>
         </section>

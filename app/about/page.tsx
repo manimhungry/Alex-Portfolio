@@ -1,15 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const focusAreas = [
-  "Mechanical design",
-  "CAD ownership",
-  "Robotics",
-  "Fixtures",
-  "Prototyping",
-  "Testing",
-];
-
 const profileCards = [
   {
     label: "Currently",
@@ -22,6 +13,21 @@ const profileCards = [
   {
     label: "How I Work",
     text: "Define the objective, build the hardware, measure it, and iterate.",
+  },
+];
+
+const toolGroups = [
+  {
+    label: "CAD",
+    text: "SOLIDWORKS, Fusion 360, Onshape",
+  },
+  {
+    label: "Build",
+    text: "FDM printing, waterjet, laser cutting, hand assembly",
+  },
+  {
+    label: "Validation",
+    text: "Mass measurement, fit checks, robot runs, hardware inspection",
   },
 ];
 
@@ -57,7 +63,7 @@ export default function AboutPage() {
             href="/experience"
             className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-gray-400 transition hover:bg-white/[0.08] hover:text-white"
           >
-            Experience
+            Experience / Internships
           </Link>
         </nav>
 
@@ -98,17 +104,6 @@ export default function AboutPage() {
                 Mechanical engineering student focused on hardware that moves
                 from CAD into real prototypes, testing, and iteration.
               </p>
-
-              <div className="mt-7 flex flex-wrap gap-2">
-                {focusAreas.map((area) => (
-                  <span
-                    key={area}
-                    className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs font-medium text-gray-200"
-                  >
-                    {area}
-                  </span>
-                ))}
-              </div>
             </div>
 
             <div className="mt-10 grid gap-4 md:grid-cols-3">
@@ -125,6 +120,24 @@ export default function AboutPage() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-8 border-t border-white/10 pt-6">
+              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+                Tools + Shop Work
+              </div>
+              <div className="mt-4 grid gap-5 md:grid-cols-3">
+                {toolGroups.map((group) => (
+                  <div key={group.label}>
+                    <div className="text-sm font-semibold text-white">
+                      {group.label}
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-gray-400">
+                      {group.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>

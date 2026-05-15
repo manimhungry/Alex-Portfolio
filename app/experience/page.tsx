@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 
 type Metric = {
   label: string;
@@ -13,7 +12,7 @@ type StoryBlock = {
   title: string;
   stat: string;
   bullets: string[];
-  image: {
+  image?: {
     src: string;
     alt: string;
     contain?: boolean;
@@ -23,29 +22,15 @@ type StoryBlock = {
 
 type WorkTrack = {
   label: string;
-  title: string;
   stat: string;
-  bullets: string[];
+  text: string;
+  icon: "tool" | "checklist" | "drawing" | "inspect";
 };
 
 const metrics: Metric[] = [
   { label: "CS2 BOM match", value: "15/60 → 57/60" },
   { label: "CS2 CAD issues fixed", value: "~100" },
   { label: "Manufacturing procedures", value: "15+" },
-  { label: "Verification tasks", value: "5" },
-  { label: "Quality inspection", value: "~100 parts" },
-  { label: "Screen wipe test", value: "360 wipes" },
-];
-
-const tags = [
-  "SOLIDWORKS",
-  "PDM",
-  "GD&T",
-  "CS2 Recovery",
-  "GT 450 Manufacturing",
-  "Verification",
-  "Quality Inspection",
-  "Traceability",
 ];
 
 const storyBlocks: StoryBlock[] = [
@@ -109,69 +94,35 @@ const storyBlocks: StoryBlock[] = [
       "Applied GD&T under engineering review",
       "Autocollimator drawings later used for manufacturing",
     ],
-    image: {
-      src: "/leica-traceability-tracker.png",
-      alt: "Traceability tracker spreadsheet",
-      contain: true,
-      callouts: ["PDM workflow", "Drawing updates", "Released work"],
-    },
   },
 ];
 
 const workTracks: WorkTrack[] = [
   {
     label: "Manufacturing support",
-    title: "Built and checked production scanner hardware.",
     stat: "15+ procedures",
-    bullets: [
-      "Followed controlled PDF procedures step by step",
-      "Supported GT 450 production scanner builds",
-      "Worked on base plate, stanchion, VTM, VPU, rack gripper, and autoloader procedures",
-      "Documented build steps, checks, and procedure results",
-    ],
+    text: "Built and checked GT 450 scanner hardware from controlled procedures.",
+    icon: "tool",
   },
   {
     label: "Verification + testing",
-    title: "Verified hardware behavior against controlled procedures.",
     stat: "5 verification tasks",
-    bullets: [
-      "Checked documented requirements against real hardware behavior",
-      "Verified XY travel distance behavior against procedure expectations",
-      "Supported GT 450 testing workflows",
-      "Performed 360 screen wipes to mimic hospital cleaning durability",
-    ],
+    text: "Verified hardware behavior, XY travel, and screen-wipe durability.",
+    icon: "checklist",
   },
   {
     label: "Design + drawing support",
-    title: "Updated drawings, fixtures, and production documentation.",
-    stat: "Design tasks",
-    bullets: [
-      "Updated cable drawing and optical light cover DWG",
-      "Worked on dimensioning, BOM, and balloon updates",
-      "Supported fixture and 3D print work",
-      "Built or supported cover fixture and auto collimator work",
-    ],
+    stat: "Drawings + fixtures",
+    text: "Updated drawings, BOM balloons, fixtures, and 3D-print support work.",
+    icon: "drawing",
   },
   {
     label: "Quality + traceability",
-    title: "Checked parts, inventory, and traceability records.",
     stat: "~100 parts inspected",
-    bullets: [
-      "Sorted and inspected Z-stanchion parts under NCR-style work",
-      "Checked repeated parts for flatness and visible damage",
-      "Completed critical part inventory checks",
-      "Supported Excel traceability worksheets and design-control tracking",
-    ],
+    text: "Inspected parts, checked inventory, and supported traceability records.",
+    icon: "inspect",
   },
 ];
-
-function Pill({ children }: { children: ReactNode }) {
-  return (
-    <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs font-medium text-gray-200">
-      {children}
-    </span>
-  );
-}
 
 function MetricCard({ label, value }: Metric) {
   return (
@@ -188,6 +139,8 @@ function MetricCard({ label, value }: Metric) {
 }
 
 function ImageStoryCard({ block }: { block: StoryBlock }) {
+  if (!block.image) return null;
+
   return (
     <div className="group overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/20">
       <div className="relative h-[360px] bg-black/30">
@@ -202,17 +155,6 @@ function ImageStoryCard({ block }: { block: StoryBlock }) {
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
-
-        <div className="absolute left-4 top-4 flex max-w-[88%] flex-wrap gap-2">
-          {block.image.callouts.map((callout) => (
-            <span
-              key={callout}
-              className="rounded-full border border-white/15 bg-black/55 px-3 py-1 text-xs font-medium text-white shadow-lg backdrop-blur"
-            >
-              {callout}
-            </span>
-          ))}
-        </div>
 
         <div className="absolute bottom-5 left-5 right-5">
           <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-200">
@@ -248,10 +190,6 @@ function StorySection({
               {block.title}
             </h2>
 
-            <div className="mt-5 inline-flex rounded-full border border-blue-300/20 bg-blue-400/10 px-4 py-2 text-sm font-semibold text-blue-100">
-              {block.stat}
-            </div>
-
             <div className="mt-6 grid gap-3">
               {block.bullets.map((item) => (
                 <div
@@ -265,45 +203,84 @@ function StorySection({
           </div>
         </div>
 
-        <div className={reverse ? "lg:order-1" : ""}>
-          <ImageStoryCard block={block} />
-        </div>
+        {block.image && (
+          <div className={reverse ? "lg:order-1" : ""}>
+            <ImageStoryCard block={block} />
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
+function WorkIcon({ icon }: { icon: WorkTrack["icon"] }) {
+  const common = {
+    className: "h-6 w-6",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.8",
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
+
+  if (icon === "tool") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true" {...common}>
+        <path d="m14.5 5.5 4 4" />
+        <path d="m13 7 2.5-2.5a3 3 0 0 1 3.9-.25l.35.25-4.25 4.25" />
+        <path d="M14 10 6.5 17.5a2.1 2.1 0 0 1-3-3L11 7" />
+      </svg>
+    );
+  }
+
+  if (icon === "checklist") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true" {...common}>
+        <path d="M8 6h11" />
+        <path d="M8 12h11" />
+        <path d="M8 18h11" />
+        <path d="m3.5 6 1 1 2-2" />
+        <path d="m3.5 12 1 1 2-2" />
+        <path d="m3.5 18 1 1 2-2" />
+      </svg>
+    );
+  }
+
+  if (icon === "drawing") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true" {...common}>
+        <path d="M6 3h9l3 3v15H6z" />
+        <path d="M15 3v4h4" />
+        <path d="M9 15h6" />
+        <path d="M9 11h3" />
+        <path d="m9 19 6-6" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...common}>
+      <circle cx="10.5" cy="10.5" r="5.5" />
+      <path d="m15 15 5 5" />
+      <path d="M8.5 10.5h4" />
+      <path d="M10.5 8.5v4" />
+    </svg>
+  );
+}
+
 function WorkTrackCard({ track }: { track: WorkTrack }) {
   return (
-    <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] p-6 shadow-2xl shadow-black/20">
-      <div className="absolute left-6 top-6 h-[calc(100%-3rem)] w-px bg-gradient-to-b from-blue-300/70 via-blue-300/25 to-transparent" />
-
-      <div className="relative pl-7">
-        <div className="absolute left-0 top-1.5 h-3 w-3 rounded-full border border-blue-100 bg-blue-300 shadow-[0_0_24px_rgba(147,197,253,0.5)]" />
-
-        <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-300">
-          {track.label}
-        </div>
-
-        <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">
-          {track.title}
-        </h3>
-
-        <div className="mt-4 inline-flex rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-sm font-semibold text-white">
-          {track.stat}
-        </div>
-
-        <div className="mt-6 grid gap-3">
-          {track.bullets.map((bullet) => (
-            <div
-              key={bullet}
-              className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm leading-6 text-gray-300"
-            >
-              {bullet}
-            </div>
-          ))}
-        </div>
+    <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-5 shadow-2xl shadow-black/15">
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-blue-300/20 bg-blue-400/10 text-blue-200">
+        <WorkIcon icon={track.icon} />
       </div>
+      <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-300">
+        {track.label}
+      </div>
+      <div className="mt-3 text-2xl font-semibold tracking-tight text-white">
+        {track.stat}
+      </div>
+      <p className="mt-3 text-sm leading-6 text-gray-400">{track.text}</p>
     </div>
   );
 }
@@ -317,11 +294,11 @@ function WorkTracksSection() {
         </div>
 
         <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-          Separate from CS2 recovery.
+          Production hardware support
         </h2>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-4">
         {workTracks.map((track) => (
           <WorkTrackCard key={track.label} track={track} />
         ))}
@@ -390,13 +367,6 @@ export default function ExperiencePage() {
 
         <div className="min-w-0">
           <header className="mb-14">
-            <div className="mb-5 flex flex-wrap gap-2">
-              <Pill>Leica Biosystems</Pill>
-              <Pill>Danaher</Pill>
-              <Pill>Hardware Engineering Intern</Pill>
-              <Pill>Production Medical Hardware</Pill>
-            </div>
-
             <h1 className="max-w-5xl text-5xl font-bold tracking-tight text-white md:text-6xl">
               Leica Biosystems (Danaher)
             </h1>
@@ -406,9 +376,9 @@ export default function ExperiencePage() {
             </p>
 
             <p className="mt-5 max-w-4xl text-lg leading-8 text-gray-300">
-              CS2 CAD/BOM recovery, drawing support, hardware checks, GT 450
-              manufacturing support, verification, quality inspection, and
-              traceability work.
+              As a hardware engineering intern, I worked on CS2 CAD/BOM
+              recovery, drawing support, hardware checks, GT 450 manufacturing
+              support, verification, quality inspection, and traceability work.
             </p>
           </header>
 
@@ -418,12 +388,6 @@ export default function ExperiencePage() {
                 <MetricCard key={metric.label} {...metric} />
               ))}
             </div>
-          </section>
-
-          <section className="mb-20 flex flex-wrap gap-2">
-            {tags.map((tag) => (
-              <Pill key={tag}>{tag}</Pill>
-            ))}
           </section>
 
           <div className="grid gap-20">
