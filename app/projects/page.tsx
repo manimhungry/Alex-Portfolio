@@ -60,6 +60,32 @@ type ProjectPreview = {
   tags: string[];
 };
 
+const engineeringStrengths = [
+  {
+    label: "CAD to Hardware",
+    text: "Designs that are measured, assembled, and corrected against real parts.",
+  },
+  {
+    label: "Test-Driven Iteration",
+    text: "Failures become data, then geometry, settings, or process changes.",
+  },
+  {
+    label: "Fixture Design",
+    text: "Repeatable datums, practical constraints, and cleaner setup workflows.",
+  },
+  {
+    label: "Mechanism Integration",
+    text: "Motion, packaging, fabrication, and serviceability in one system.",
+  },
+];
+
+const currentBuildSignals: Metric[] = [
+  { label: "Status", value: "Parts staged" },
+  { label: "Next proof", value: "First motion" },
+  { label: "Scope", value: "6 axes" },
+  { label: "Case study", value: "Coming after assembly" },
+];
+
 const nordsonChapters: Chapter[] = [
   {
     id: "nordson-overview",
@@ -406,8 +432,8 @@ const projectPreviews: ProjectPreview[] = [
       callouts: ["5 µL target", "100-position run", "Custom tray fixture"],
     },
     signal: "10 → 178 slots",
-    result: "Corrected the fixture, calibrated pressure, and scaled the tray.",
-    tags: ["Fixture Design", "Calibration", "Scale-Up"],
+    result: "Current workflow is validated; next step is testing a new fluid.",
+    tags: ["Fixture Design", "Calibration", "Active Validation"],
   },
   {
     id: "direct-drive-turret",
@@ -460,7 +486,9 @@ function MetricCard({ label, value }: Metric) {
       <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">
         {label}
       </div>
-      <div className="mt-2 text-xl font-semibold text-white">{value}</div>
+      <div className="mt-2 break-words text-xl font-semibold text-white">
+        {value}
+      </div>
     </div>
   );
 }
@@ -492,11 +520,11 @@ function DetailCard({
 
 function TagList({ tags }: { tags: string[] }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex max-w-full flex-wrap gap-2">
       {tags.map((tag) => (
         <span
           key={tag}
-          className="rounded-full border border-white/10 bg-white/[0.055] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-gray-200"
+          className="max-w-full break-words rounded-full border border-white/10 bg-white/[0.055] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-gray-200 sm:text-[11px] sm:tracking-[0.12em]"
         >
           {tag}
         </span>
@@ -1119,8 +1147,8 @@ function NordsonChapterVisual({ id }: { id: string }) {
 
 function SideMenu() {
   return (
-    <aside className="hidden xl:block">
-      <div className="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-4 shadow-2xl shadow-black/20 backdrop-blur">
+    <aside className="hidden self-start xl:sticky xl:top-8 xl:block">
+      <div className="max-h-[calc(100vh-4rem)] overflow-y-auto rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-4 shadow-2xl shadow-black/20 backdrop-blur">
         <div className="mb-4 space-y-3">
           <Link
             href="/"
@@ -1129,9 +1157,19 @@ function SideMenu() {
             ← Back to Home
           </Link>
 
-          <div className="px-3 text-xs font-semibold uppercase tracking-[0.16em] text-blue-300">
-            Project Menu
-          </div>
+          <a
+            href="#project-gallery"
+            className="block rounded-xl px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-blue-300 transition hover:bg-white/[0.07] hover:text-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
+          >
+            Project Gallery
+          </a>
+
+          <a
+            href="#current-build"
+            className="block rounded-xl px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-amber-200 transition hover:bg-white/[0.07] hover:text-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-200/60"
+          >
+            Current Build
+          </a>
         </div>
 
         <nav aria-label="Project menu" className="space-y-5 text-sm">
@@ -1187,6 +1225,20 @@ function MobileJumpMenu() {
       </Link>
 
       <a
+        href="#project-gallery"
+        className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
+      >
+        Gallery
+      </a>
+
+      <a
+        href="#current-build"
+        className="whitespace-nowrap rounded-full border border-amber-200/20 bg-amber-300/[0.07] px-4 py-2 text-xs font-medium text-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-200/60"
+      >
+        Current Build
+      </a>
+
+      <a
         href="#nordson"
         className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
       >
@@ -1206,9 +1258,35 @@ function MobileJumpMenu() {
   );
 }
 
+function EngineeringStrengths() {
+  return (
+    <section className="mb-16">
+      <div className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+        Engineering Strengths
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        {engineeringStrengths.map((strength) => (
+          <div
+            key={strength.label}
+            className="rounded-[1.25rem] border border-white/10 bg-white/[0.04] p-5"
+          >
+            <h2 className="text-base font-semibold tracking-tight text-white">
+              {strength.label}
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-gray-300">
+              {strength.text}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function ProjectGallery() {
   return (
-    <section className="mb-20">
+    <section id="project-gallery" className="mb-20 scroll-mt-24">
       <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
@@ -1222,29 +1300,29 @@ function ProjectGallery() {
           <a
             key={project.id}
             href={`#${project.id}`}
-            className="group overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-1 hover:border-blue-300/25 hover:bg-white/[0.055] focus:outline-none focus:ring-2 focus:ring-blue-300/60"
+            className="group min-w-0 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-1 hover:border-blue-300/25 hover:bg-white/[0.055] focus:outline-none focus:ring-2 focus:ring-blue-300/60"
           >
             <PreviewMedia item={project.media} />
 
-            <div className="p-5">
+            <div className="min-w-0 p-5">
               <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-300">
                 {project.eyebrow}
               </div>
 
               <div className="mt-3">
-                <h3 className="text-2xl font-semibold tracking-tight text-white">
+                <h3 className="break-words text-xl font-semibold leading-tight tracking-tight text-white sm:text-2xl">
                   {project.title}
                 </h3>
               </div>
 
-              <div className="mt-5 rounded-2xl border border-blue-300/15 bg-blue-400/[0.07] p-4">
+              <div className="mt-5 min-w-0 rounded-2xl border border-blue-300/15 bg-blue-400/[0.07] p-4">
                 <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-200">
                   Outcome
                 </div>
-                <div className="mt-2 text-2xl font-semibold tracking-tight text-white">
+                <div className="mt-2 break-words text-xl font-semibold leading-tight tracking-tight text-white sm:text-2xl">
                   {project.signal}
                 </div>
-                <p className="mt-2 text-sm leading-6 text-gray-200">
+                <p className="mt-2 break-words text-sm leading-6 text-gray-200">
                   {project.result}
                 </p>
               </div>
@@ -1255,6 +1333,58 @@ function ProjectGallery() {
             </div>
           </a>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function CurrentBuildTeaser() {
+  return (
+    <section id="current-build" className="mb-28 scroll-mt-24">
+      <div className="grid gap-5 rounded-[1.75rem] border border-white/10 bg-[linear-gradient(135deg,_rgba(59,130,246,0.11),_rgba(255,255,255,0.035)_45%,_rgba(251,191,36,0.07))] p-5 shadow-2xl shadow-black/20 md:grid-cols-[1.1fr_0.9fr] md:p-7">
+        <div>
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-200">
+            Currently Building
+          </div>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+            Six-Axis Robot System
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-7 text-gray-200">
+            Parts are staged and the build is still under assembly, so I am not
+            presenting it as a finished project yet. The case study opens after
+            mechanical integration, first controlled motion, and repeatability
+            testing.
+          </p>
+
+          <div className="mt-6">
+            <TagList
+              tags={[
+                "Robotics",
+                "Motion System",
+                "Mechanical Assembly",
+                "Controls Pending",
+              ]}
+            />
+          </div>
+        </div>
+
+        <div className="rounded-[1.25rem] border border-white/10 bg-black/30 p-4">
+          <div className="grid grid-cols-2 gap-3">
+            {currentBuildSignals.map((metric) => (
+              <MetricCard key={metric.label} {...metric} />
+            ))}
+          </div>
+
+          <div className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4 font-mono text-xs leading-6 text-gray-300">
+            <div>axis_01 ... staged</div>
+            <div>axis_02 ... staged</div>
+            <div>axis_03 ... staged</div>
+            <div>axis_04 ... staged</div>
+            <div>axis_05 ... staged</div>
+            <div>axis_06 ... staged</div>
+            <div className="mt-2 text-amber-200">first_motion ... pending</div>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -1301,17 +1431,19 @@ function ChapterSection({ chapter }: { chapter: Chapter }) {
 
 function FeaturedNordsonCaseStudy() {
   const summaryMetrics = [
+    { label: "Status", value: "Active" },
     { label: "Target", value: "5 µL" },
     { label: "Validated", value: "100 positions" },
     { label: "Scaled tray", value: "178 slots" },
     { label: "Correction", value: "40 → 38 mm" },
+    { label: "Next step", value: "New fluid test" },
   ];
 
   return (
     <section id="nordson" className="mb-36 scroll-mt-24">
       <div className="mb-8">
         <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
-          Lab Automation / Fixture Design
+          Lab Automation / Active Fixture Design
         </div>
 
         <h2 className="mt-3 text-4xl font-semibold tracking-tight text-white md:text-5xl">
@@ -1321,6 +1453,17 @@ function FeaturedNordsonCaseStudy() {
         <p className="mt-3 max-w-5xl text-lg text-gray-300">
           Mechanical Owner — Fixture Design, Calibration, and Test
         </p>
+
+        <div className="mt-5 rounded-[1.25rem] border border-amber-200/20 bg-amber-300/[0.07] p-4">
+          <div className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-200">
+            Active Lab Work
+          </div>
+          <p className="mt-2 text-sm leading-6 text-gray-200 md:text-base">
+            This case study documents the current validated workflow, not a
+            finished endpoint. The next phase is validating a new fluid through
+            the same calibrated dispense process.
+          </p>
+        </div>
       </div>
 
       <div className="mb-8 grid gap-4 rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5 md:grid-cols-[1fr_1.1fr] md:p-6">
@@ -1332,6 +1475,8 @@ function FeaturedNordsonCaseStudy() {
             I converted a manual dispense process into a calibrated robot
             workflow by designing the tray fixture, validating pressure settings,
             and iterating on real hardware until the dispense rows were clean.
+            The system is still active, with new-fluid validation as the next
+            test phase.
           </p>
         </div>
 
@@ -1469,7 +1614,7 @@ export default function ProjectsPage() {
   return (
     <main
       id="main"
-      className="min-h-screen bg-[linear-gradient(to_bottom,_#050505,_#0f172a_45%,_#050505)] px-6 py-10 text-gray-100 md:px-10 md:py-14"
+      className="min-h-screen overflow-x-hidden bg-[linear-gradient(to_bottom,_#050505,_#0f172a_45%,_#050505)] px-6 py-10 text-gray-100 md:px-10 md:py-14"
     >
       <div className="mx-auto grid max-w-[1520px] gap-8 xl:grid-cols-[240px_minmax(0,1fr)]">
         <SideMenu />
@@ -1491,7 +1636,9 @@ export default function ProjectsPage() {
           </header>
 
           <MobileJumpMenu />
+          <EngineeringStrengths />
           <ProjectGallery />
+          <CurrentBuildTeaser />
 
           <FeaturedNordsonCaseStudy />
 
