@@ -481,9 +481,9 @@ const projectPreviews: ProjectPreview[] = [
 
 function MetricCard({ label, value }: Metric) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">
+    <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4 shadow-xl shadow-black/20">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent" />
+      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-300">
         {label}
       </div>
       <div className="mt-2 break-words text-xl font-semibold text-white">
@@ -505,15 +505,15 @@ function DetailCard({
   return (
     <div className="border-t border-white/10 pt-5">
       <div className="flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-blue-300/20 bg-blue-400/10 text-sm text-blue-200">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-sky-300/20 bg-sky-400/[0.10] text-sm text-sky-200">
           {icon}
         </div>
-        <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-300">
+        <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-200">
           {label}
         </div>
       </div>
 
-      <p className="mt-4 text-sm leading-6 text-gray-300">{text}</p>
+      <p className="mt-4 text-sm leading-6 text-gray-200">{text}</p>
     </div>
   );
 }
@@ -524,7 +524,7 @@ function TagList({ tags }: { tags: string[] }) {
       {tags.map((tag) => (
         <span
           key={tag}
-          className="max-w-full break-words rounded-full border border-white/10 bg-white/[0.055] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-gray-200 sm:text-[11px] sm:tracking-[0.12em]"
+          className="max-w-full break-words rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-gray-100 sm:text-[11px] sm:tracking-[0.12em]"
         >
           {tag}
         </span>
@@ -576,7 +576,7 @@ function MediaCard({
   hero?: boolean;
 }) {
   return (
-    <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/25">
+    <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/25">
       <div className={`relative w-full ${className}`}>
         {item.type === "video" ? (
           <video
@@ -602,7 +602,7 @@ function MediaCard({
 
         {item.caption && (
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent px-6 pb-5 pt-20">
-            <p className="text-base text-gray-200 md:text-lg">
+            <p className="text-base text-white md:text-lg">
               {item.caption}
             </p>
           </div>
@@ -614,7 +614,7 @@ function MediaCard({
 
 function VideoPlaceholder({ slot }: { slot: VideoSlot }) {
   return (
-    <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/20">
+    <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.04] shadow-xl shadow-black/25">
       <div className="relative h-80 bg-black/30 md:h-[420px]">
         <video
           src={slot.src}
@@ -633,12 +633,12 @@ function VideoPlaceholder({ slot }: { slot: VideoSlot }) {
           <h4 className="text-xl font-semibold tracking-tight text-white">
             {slot.title}
           </h4>
-          <p className="mt-1 text-sm text-gray-300">{slot.caption}</p>
+          <p className="mt-1 text-sm text-gray-100">{slot.caption}</p>
         </div>
       </div>
 
       <div className="p-5">
-        <p className="text-sm leading-6 text-gray-400">{slot.note}</p>
+        <p className="text-sm leading-6 text-gray-200">{slot.note}</p>
       </div>
     </div>
   );
@@ -654,9 +654,9 @@ function VisualShell({
   children: ReactNode;
 }) {
   return (
-    <div className="mt-5 overflow-hidden rounded-[1.35rem] border border-white/10 bg-black/20">
+    <div className="mt-5 overflow-hidden rounded-[1.35rem] border border-white/10 bg-white/[0.04]">
       <div className="border-b border-white/10 px-4 py-3">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-300">
+        <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-200">
           {eyebrow}
         </div>
         <div className="mt-1 text-sm font-semibold text-white">{title}</div>
@@ -703,7 +703,7 @@ function InlineMedia({
 
         {item.caption && (
           <div className="absolute inset-x-0 bottom-0 px-4 pb-3 pt-12">
-            <p className="text-xs font-medium text-gray-100">{item.caption}</p>
+            <p className="text-xs font-medium text-white">{item.caption}</p>
           </div>
         )}
       </div>
@@ -713,11 +713,11 @@ function InlineMedia({
 
 function EquationCard() {
   return (
-    <div className="rounded-2xl border border-blue-300/20 bg-blue-400/[0.06] p-4">
-      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-200">
+    <div className="rounded-2xl border border-sky-300/20 bg-sky-400/[0.10] p-4">
+      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-200">
         Interpolation result
       </div>
-      <div className="mt-3 rounded-xl border border-white/10 bg-black/25 p-3 font-mono text-xs leading-6 text-gray-200">
+      <div className="mt-3 rounded-xl border border-sky-300/15 bg-white/[0.04] p-3 font-mono text-xs leading-6 text-gray-100">
         P = 48 + ((5.0 - 4.6) / (5.3 - 4.6)) × (54 - 48)
       </div>
       <div className="mt-3 text-2xl font-semibold tracking-tight text-white">
@@ -903,11 +903,11 @@ function ScaleVisual() {
             callouts: ["178 slots", "Usable travel"],
           }}
         />
-        <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-300">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-200">
             Constraint
           </div>
-          <p className="mt-3 text-sm leading-6 text-gray-300">
+          <p className="mt-3 text-sm leading-6 text-gray-200">
             A larger 261-slot concept used the plate area, but the robot reached
             the physical lab wall before full extension. The 178-slot tray kept
             the scale-up inside usable machine travel.
@@ -935,28 +935,28 @@ function ShrinkageVisual() {
             callouts: ["Printed tray", "Shrinkage gap"],
           }}
         />
-        <div className="rounded-2xl border border-amber-300/20 bg-amber-400/[0.055] p-5">
+        <div className="rounded-2xl border border-amber-300/25 bg-amber-400/[0.08] p-5">
           <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-amber-200">
             Calculation
           </div>
-          <div className="mt-4 grid gap-3 text-sm text-gray-200">
-            <div className="flex justify-between gap-4 border-b border-white/10 pb-2">
+          <div className="mt-4 grid gap-3 text-sm text-gray-100">
+            <div className="flex justify-between gap-4 border-b border-amber-300/25 pb-2">
               <span>CAD target</span>
               <strong>354.25 mm</strong>
             </div>
-            <div className="flex justify-between gap-4 border-b border-white/10 pb-2">
+            <div className="flex justify-between gap-4 border-b border-amber-300/25 pb-2">
               <span>Printed length</span>
               <strong>351.13 mm</strong>
             </div>
-            <div className="flex justify-between gap-4 border-b border-white/10 pb-2">
+            <div className="flex justify-between gap-4 border-b border-amber-300/25 pb-2">
               <span>Shrinkage</span>
               <strong>3.12 mm</strong>
             </div>
-            <div className="rounded-xl border border-white/10 bg-black/25 p-3 font-mono text-xs">
+            <div className="rounded-xl border border-amber-300/25 bg-white/[0.04] p-3 font-mono text-xs">
               354.25 / 351.13 = 1.0089
             </div>
             <div className="flex items-end justify-between gap-4">
-              <span className="text-gray-300">XY compensation</span>
+              <span className="text-gray-200">XY compensation</span>
               <strong className="text-3xl tracking-tight text-white">100.89%</strong>
             </div>
           </div>
@@ -989,7 +989,7 @@ function CompactCalibrationPlot() {
     .join(" ");
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/20 p-3">
+    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3">
       <svg
         viewBox={`0 0 ${width} ${height}`}
         role="img"
@@ -1148,25 +1148,25 @@ function NordsonChapterVisual({ id }: { id: string }) {
 function SideMenu() {
   return (
     <aside className="hidden self-start xl:sticky xl:top-8 xl:block">
-      <div className="max-h-[calc(100vh-4rem)] overflow-y-auto rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-4 shadow-2xl shadow-black/20 backdrop-blur">
+      <div className="max-h-[calc(100vh-4rem)] overflow-y-auto rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-4 shadow-2xl shadow-black/25 backdrop-blur">
         <div className="mb-4 space-y-3">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-gray-300 transition hover:bg-white/[0.07] hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300/60"
+            className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-gray-200 transition hover:bg-white/[0.06] hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300/60"
           >
             ← Back to Home
           </Link>
 
           <a
             href="#project-gallery"
-            className="block rounded-xl px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-blue-300 transition hover:bg-white/[0.07] hover:text-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
+            className="block rounded-xl px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-sky-200 transition hover:bg-sky-400/[0.10] hover:text-sky-100 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
           >
             Project Gallery
           </a>
 
           <a
             href="#current-build"
-            className="block rounded-xl px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-amber-200 transition hover:bg-white/[0.07] hover:text-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-200/60"
+            className="block rounded-xl px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-amber-200 transition hover:bg-amber-400/[0.08] hover:text-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-200/60"
           >
             Current Build
           </a>
@@ -1176,7 +1176,7 @@ function SideMenu() {
           <div>
             <a
               href="#nordson"
-              className="block rounded-xl px-3 py-2 font-semibold text-white transition hover:bg-white/[0.07]"
+              className="block rounded-xl px-3 py-2 font-semibold text-white transition hover:bg-white/[0.06]"
             >
               Automated Dispensing
             </a>
@@ -1186,7 +1186,7 @@ function SideMenu() {
                 <a
                   key={chapter.id}
                   href={`#${chapter.id}`}
-                  className="block rounded-lg px-3 py-1.5 text-xs text-gray-300 transition hover:bg-white/[0.06] hover:text-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
+                  className="block rounded-lg px-3 py-1.5 text-xs text-gray-200 transition hover:bg-sky-400/[0.10] hover:text-sky-200 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
                 >
                   {chapter.eyebrow.replace("/", "·")}
                 </a>
@@ -1199,7 +1199,7 @@ function SideMenu() {
               <a
                 key={project.id}
                 href={`#${project.id}`}
-                className="block rounded-xl px-3 py-2 font-medium text-gray-300 transition hover:bg-white/[0.07] hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300/60"
+                className="block rounded-xl px-3 py-2 font-medium text-gray-200 transition hover:bg-white/[0.06] hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-300/60"
               >
                 {project.title}
               </a>
@@ -1215,32 +1215,32 @@ function MobileJumpMenu() {
   return (
     <nav
       aria-label="Project jump links"
-      className="mb-12 flex gap-2 overflow-x-auto rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-3 backdrop-blur xl:hidden"
+      className="mb-12 flex gap-2 overflow-x-auto rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-3 shadow-lg shadow-black/20 backdrop-blur xl:hidden"
     >
       <Link
         href="/"
-        className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
+        className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-xs font-medium text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
       >
         ← Home
       </Link>
 
       <a
         href="#project-gallery"
-        className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
+        className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-xs font-medium text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
       >
         Gallery
       </a>
 
       <a
         href="#current-build"
-        className="whitespace-nowrap rounded-full border border-amber-200/20 bg-amber-300/[0.07] px-4 py-2 text-xs font-medium text-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-200/60"
+        className="whitespace-nowrap rounded-full border border-amber-300/25 bg-amber-400/[0.08] px-4 py-2 text-xs font-medium text-amber-200 focus:outline-none focus:ring-2 focus:ring-amber-200/60"
       >
         Current Build
       </a>
 
       <a
         href="#nordson"
-        className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs font-medium text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
+        className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-xs font-medium text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
       >
         Nordson
       </a>
@@ -1249,7 +1249,7 @@ function MobileJumpMenu() {
         <a
           key={project.id}
           href={`#${project.id}`}
-          className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
+          className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-xs font-medium text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-300/60"
         >
           {project.title}
         </a>
@@ -1261,7 +1261,7 @@ function MobileJumpMenu() {
 function EngineeringStrengths() {
   return (
     <section className="mb-16">
-      <div className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+      <div className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
         Engineering Strengths
       </div>
 
@@ -1269,12 +1269,12 @@ function EngineeringStrengths() {
         {engineeringStrengths.map((strength) => (
           <div
             key={strength.label}
-            className="rounded-[1.25rem] border border-white/10 bg-white/[0.04] p-5"
+            className="rounded-[1.25rem] border border-white/10 bg-white/[0.04] p-5 shadow-xl shadow-black/20"
           >
             <h2 className="text-base font-semibold tracking-tight text-white">
               {strength.label}
             </h2>
-            <p className="mt-3 text-sm leading-6 text-gray-300">
+            <p className="mt-3 text-sm leading-6 text-gray-200">
               {strength.text}
             </p>
           </div>
@@ -1289,7 +1289,7 @@ function ProjectGallery() {
     <section id="project-gallery" className="mb-20 scroll-mt-24">
       <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
             Project Gallery
           </div>
         </div>
@@ -1300,12 +1300,12 @@ function ProjectGallery() {
           <a
             key={project.id}
             href={`#${project.id}`}
-            className="group min-w-0 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/20 transition duration-300 hover:-translate-y-1 hover:border-blue-300/25 hover:bg-white/[0.055] focus:outline-none focus:ring-2 focus:ring-blue-300/60"
+            className="group min-w-0 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/25 transition duration-300 hover:-translate-y-1 hover:border-sky-300/40 hover:bg-sky-400/[0.12] focus:outline-none focus:ring-2 focus:ring-blue-300/60"
           >
             <PreviewMedia item={project.media} />
 
             <div className="min-w-0 p-5">
-              <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-300">
+              <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-200">
                 {project.eyebrow}
               </div>
 
@@ -1315,14 +1315,14 @@ function ProjectGallery() {
                 </h3>
               </div>
 
-              <div className="mt-5 min-w-0 rounded-2xl border border-blue-300/15 bg-blue-400/[0.07] p-4">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-200">
+              <div className="mt-5 min-w-0 rounded-2xl border border-sky-300/20 bg-sky-400/[0.10] p-4">
+                <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-200">
                   Outcome
                 </div>
                 <div className="mt-2 break-words text-xl font-semibold leading-tight tracking-tight text-white sm:text-2xl">
                   {project.signal}
                 </div>
-                <p className="mt-2 break-words text-sm leading-6 text-gray-200">
+                <p className="mt-2 break-words text-sm leading-6 text-gray-100">
                   {project.result}
                 </p>
               </div>
@@ -1341,7 +1341,7 @@ function ProjectGallery() {
 function CurrentBuildTeaser() {
   return (
     <section id="current-build" className="mb-28 scroll-mt-24">
-      <div className="grid gap-5 rounded-[1.75rem] border border-white/10 bg-[linear-gradient(135deg,_rgba(59,130,246,0.11),_rgba(255,255,255,0.035)_45%,_rgba(251,191,36,0.07))] p-5 shadow-2xl shadow-black/20 md:grid-cols-[1.1fr_0.9fr] md:p-7">
+      <div className="grid gap-5 rounded-[1.75rem] border border-amber-300/25 bg-[linear-gradient(135deg,_rgba(251,191,36,0.10),_rgba(255,255,255,0.04)_46%,_rgba(56,189,248,0.10))] p-5 shadow-2xl shadow-black/25 md:grid-cols-[1.1fr_0.9fr] md:p-7">
         <div>
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-amber-200">
             Currently Building
@@ -1349,7 +1349,7 @@ function CurrentBuildTeaser() {
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
             Six-Axis Robot System
           </h2>
-          <p className="mt-4 max-w-3xl text-base leading-7 text-gray-200">
+          <p className="mt-4 max-w-3xl text-base leading-7 text-gray-100">
             Parts are staged and the build is still under assembly, so I am not
             presenting it as a finished project yet. The case study opens after
             mechanical integration, first controlled motion, and repeatability
@@ -1368,14 +1368,14 @@ function CurrentBuildTeaser() {
           </div>
         </div>
 
-        <div className="rounded-[1.25rem] border border-white/10 bg-black/30 p-4">
+        <div className="rounded-[1.25rem] border border-white/10 bg-white/[0.06] p-4">
           <div className="grid grid-cols-2 gap-3">
             {currentBuildSignals.map((metric) => (
               <MetricCard key={metric.label} {...metric} />
             ))}
           </div>
 
-          <div className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4 font-mono text-xs leading-6 text-gray-300">
+          <div className="mt-4 rounded-2xl border border-white/10 bg-slate-950 p-4 font-mono text-xs leading-6 text-gray-200">
             <div>axis_01 ... staged</div>
             <div>axis_02 ... staged</div>
             <div>axis_03 ... staged</div>
@@ -1393,10 +1393,10 @@ function CurrentBuildTeaser() {
 function ChapterSection({ chapter }: { chapter: Chapter }) {
   return (
     <section id={chapter.id} className="scroll-mt-28">
-      <div className="relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-6 shadow-2xl shadow-black/20">
-        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-blue-300/35 to-transparent" />
+      <div className="relative flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-6 shadow-xl shadow-black/25">
+        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent" />
 
-        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
           {chapter.eyebrow}
         </div>
 
@@ -1404,7 +1404,7 @@ function ChapterSection({ chapter }: { chapter: Chapter }) {
           {chapter.title}
         </h3>
 
-        <p className="mt-4 max-w-5xl text-sm leading-6 text-gray-200 md:text-base md:leading-7">
+        <p className="mt-4 max-w-5xl text-sm leading-6 text-gray-100 md:text-base md:leading-7">
           {chapter.summary}
         </p>
 
@@ -1414,7 +1414,7 @@ function ChapterSection({ chapter }: { chapter: Chapter }) {
           <div className="mt-auto grid grid-cols-2 gap-x-5 gap-y-3 border-t border-white/10 pt-5">
             {chapter.metrics.map((metric) => (
               <div key={metric.label}>
-                <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">
+                <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-300">
                   {metric.label}
                 </div>
                 <div className="mt-1 text-lg font-semibold text-white">
@@ -1442,7 +1442,7 @@ function FeaturedNordsonCaseStudy() {
   return (
     <section id="nordson" className="mb-36 scroll-mt-24">
       <div className="mb-8">
-        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
           Lab Automation / Active Fixture Design
         </div>
 
@@ -1450,15 +1450,15 @@ function FeaturedNordsonCaseStudy() {
           Automated 5 µL Dispensing Workflow
         </h2>
 
-        <p className="mt-3 max-w-5xl text-lg text-gray-300">
+        <p className="mt-3 max-w-5xl text-lg text-gray-200">
           Mechanical Owner — Fixture Design, Calibration, and Test
         </p>
 
-        <div className="mt-5 rounded-[1.25rem] border border-amber-200/20 bg-amber-300/[0.07] p-4">
+        <div className="mt-5 rounded-[1.25rem] border border-amber-300/25 bg-amber-400/[0.08] p-4">
           <div className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-200">
             Active Lab Work
           </div>
-          <p className="mt-2 text-sm leading-6 text-gray-200 md:text-base">
+          <p className="mt-2 text-sm leading-6 text-gray-100 md:text-base">
             This case study documents the current validated workflow, not a
             finished endpoint. The next phase is validating a new fluid through
             the same calibrated dispense process.
@@ -1466,12 +1466,12 @@ function FeaturedNordsonCaseStudy() {
         </div>
       </div>
 
-      <div className="mb-8 grid gap-4 rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5 md:grid-cols-[1fr_1.1fr] md:p-6">
+      <div className="mb-8 grid gap-4 rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-5 shadow-xl shadow-black/20 md:grid-cols-[1fr_1.1fr] md:p-6">
         <div>
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
             Executive Summary
           </div>
-          <p className="mt-3 text-base leading-7 text-gray-200">
+          <p className="mt-3 text-base leading-7 text-gray-100">
             I converted a manual dispense process into a calibrated robot
             workflow by designing the tray fixture, validating pressure settings,
             and iterating on real hardware until the dispense rows were clean.
@@ -1508,7 +1508,7 @@ function FeaturedNordsonCaseStudy() {
       <div className="mt-8">
         <div className="mb-5 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
               Validation Videos
             </div>
             <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">
@@ -1546,7 +1546,7 @@ function CompactProjectSection({
   return (
     <section id={project.id} className="mb-32 scroll-mt-24">
       <div className="mb-8">
-        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
           {project.eyebrow}
         </div>
 
@@ -1554,11 +1554,11 @@ function CompactProjectSection({
           {project.title}
         </h2>
 
-        <p className="mt-3 max-w-4xl text-lg text-gray-300">
+        <p className="mt-3 max-w-4xl text-lg text-gray-200">
           {project.role}
         </p>
 
-        <p className="mt-4 max-w-4xl text-base leading-7 text-gray-200">
+        <p className="mt-4 max-w-4xl text-base leading-7 text-gray-100">
           {project.summary}
         </p>
 
@@ -1569,8 +1569,8 @@ function CompactProjectSection({
 
       <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
         <div className={reverse ? "lg:order-2" : ""}>
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.045] p-7">
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-300/35 to-transparent" />
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-7 shadow-xl shadow-black/20">
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent" />
 
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
               {project.metrics.map((metric) => (
@@ -1614,14 +1614,14 @@ export default function ProjectsPage() {
   return (
     <main
       id="main"
-      className="min-h-screen overflow-x-hidden bg-[linear-gradient(to_bottom,_#050505,_#0f172a_45%,_#050505)] px-6 py-10 text-gray-100 md:px-10 md:py-14"
+      className="min-h-screen overflow-x-hidden bg-[linear-gradient(to_bottom,_#0b1020,_#172033_42%,_#080b12)] px-6 py-10 text-white md:px-10 md:py-14"
     >
       <div className="mx-auto grid max-w-[1520px] gap-8 xl:grid-cols-[240px_minmax(0,1fr)]">
         <SideMenu />
 
         <div className="min-w-0">
           <header id="top" className="mx-auto mb-20 max-w-4xl text-center">
-            <div className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+            <div className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
               Selected Work
             </div>
 
@@ -1629,7 +1629,7 @@ export default function ProjectsPage() {
               Projects
             </h1>
 
-            <p className="mx-auto mt-5 max-w-3xl text-lg leading-7 text-gray-400">
+            <p className="mx-auto mt-5 max-w-3xl text-lg leading-7 text-gray-200">
               Mechanical design case studies focused on CAD, prototypes, testing,
               and real hardware outcomes.
             </p>

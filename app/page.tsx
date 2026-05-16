@@ -129,8 +129,8 @@ function HeroCTA({ item }: { item: HeroButton }) {
       href={item.href}
       className={
         item.primary
-          ? "inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 shadow-2xl shadow-black/25 transition hover:-translate-y-0.5 hover:bg-blue-100"
-          : "inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.06] px-6 py-3 text-sm font-semibold text-white shadow-2xl shadow-black/20 backdrop-blur-md transition hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/[0.1]"
+          ? "inline-flex items-center justify-center rounded-full bg-sky-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-xl shadow-black/25 transition hover:-translate-y-0.5 hover:bg-sky-200"
+          : "inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.06] px-6 py-3 text-sm font-semibold text-white shadow-xl shadow-black/20 backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-300/40 hover:bg-sky-400/[0.10]"
       }
     >
       {item.label}
@@ -142,15 +142,15 @@ function FeaturedCard({ item }: { item: FeaturedLink }) {
   return (
     <Link
       href={item.href}
-      className="group rounded-3xl border border-white/10 bg-white/[0.055] p-5 text-left shadow-2xl shadow-black/20 backdrop-blur-md transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.08]"
+      className="group rounded-3xl border border-white/10 bg-white/[0.055] p-5 text-left shadow-2xl shadow-black/25 backdrop-blur-md transition hover:-translate-y-1 hover:border-sky-300/40 hover:bg-white/[0.04]"
     >
-      <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-200">
+      <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-200">
         {item.eyebrow}
       </div>
 
       <h3 className="mt-3 text-lg font-semibold text-white">{item.title}</h3>
 
-      <p className="mt-2 text-sm leading-relaxed text-gray-400 group-hover:text-gray-300">
+      <p className="mt-2 text-sm leading-relaxed text-gray-200 group-hover:text-gray-100">
         {item.text}
       </p>
     </Link>
@@ -161,7 +161,7 @@ function ProofImageCard({ item, featured = false }: { item: ProofImage; featured
   return (
     <Link
       href={item.href}
-      className={`group overflow-hidden rounded-3xl border border-white/10 bg-black/30 shadow-2xl shadow-black/25 transition hover:-translate-y-1 hover:border-blue-200/30 ${
+      className={`group overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/25 transition hover:-translate-y-1 hover:border-sky-300/40 ${
         featured ? "md:col-span-2" : ""
       }`}
     >
@@ -209,10 +209,10 @@ export default function Home() {
         className="object-cover"
       />
 
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,_rgba(3,7,18,0.74),_rgba(3,7,18,0.66)_38%,_rgba(3,7,18,0.95))]" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,_rgba(8,11,18,0.74),_rgba(15,23,42,0.70)_42%,_rgba(8,11,18,0.96))]" />
 
       <div className="relative z-10 flex min-h-screen flex-col">
-        <header className="w-full border-b border-white/10 bg-black/20 px-6 py-5 backdrop-blur-md md:px-10">
+        <header className="w-full border-b border-white/10 bg-white/[0.06] px-6 py-5 shadow-xl shadow-black/20 backdrop-blur-md md:px-10">
           <div className="mx-auto flex max-w-7xl flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div>
               <Link href="/" className="inline-block">
@@ -221,14 +221,14 @@ export default function Home() {
                 </h1>
               </Link>
 
-              <p className="mt-1 text-sm text-gray-300">
+              <p className="mt-1 text-sm text-gray-200">
                 Mechanical Engineering — UC San Diego
               </p>
             </div>
 
             <nav
               aria-label="Primary navigation"
-              className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-gray-300"
+              className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-gray-200"
             >
               {headerLinks.map((item) => (
                 <ContactItem key={item.label} item={item} />
@@ -240,7 +240,7 @@ export default function Home() {
         <section className="flex flex-1 items-center px-6 py-16 md:px-10">
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div className="text-left">
-              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">
+              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
                 About Me
               </div>
 
@@ -248,11 +248,11 @@ export default function Home() {
                 Hi, I&apos;m Alex.
               </h2>
 
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-200 md:text-xl">
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-100 md:text-xl">
                 I&apos;m from Escondido, California. I&apos;ve always loved science, math, and watching my dad solve practical problems with care.
               </p>
 
-              <p className="mt-4 max-w-2xl text-base leading-7 text-gray-300 md:text-lg">
+              <p className="mt-4 max-w-2xl text-base leading-7 text-gray-200 md:text-lg">
                 I&apos;m a Mechanical Engineering student at UC San Diego graduating in December 2026. I design, test, and validate hardware through the Wang Lab, Triton Robotics, and my hardware engineering internship at Leica Biosystems.
               </p>
 

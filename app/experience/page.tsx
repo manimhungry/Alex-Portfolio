@@ -126,8 +126,8 @@ const workTracks: WorkTrack[] = [
 
 function MetricCard({ label, value }: Metric) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
-      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500">
+    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-xl shadow-black/20">
+      <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-300">
         {label}
       </div>
 
@@ -142,7 +142,7 @@ function ImageStoryCard({ block }: { block: StoryBlock }) {
   if (!block.image) return null;
 
   return (
-    <div className="group overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/20">
+    <div className="group overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/25">
       <div className="relative h-[360px] bg-black/30">
         <Image
           src={block.image.src}
@@ -157,7 +157,7 @@ function ImageStoryCard({ block }: { block: StoryBlock }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
 
         <div className="absolute bottom-5 left-5 right-5">
-          <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-200">
+          <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-200">
             {block.eyebrow}
           </div>
 
@@ -181,8 +181,8 @@ function StorySection({
     <section id={block.id} className="scroll-mt-28">
       <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
         <div className={reverse ? "lg:order-2" : ""}>
-          <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.035] p-7 shadow-2xl shadow-black/20">
-            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+          <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-7 shadow-2xl shadow-black/25">
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
               {block.eyebrow}
             </div>
 
@@ -194,7 +194,7 @@ function StorySection({
               {block.bullets.map((item) => (
                 <div
                   key={item}
-                  className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm leading-6 text-gray-300"
+                  className="rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 text-sm leading-6 text-gray-100"
                 >
                   {item}
                 </div>
@@ -270,17 +270,17 @@ function WorkIcon({ icon }: { icon: WorkTrack["icon"] }) {
 
 function WorkTrackCard({ track }: { track: WorkTrack }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-5 shadow-2xl shadow-black/15">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-blue-300/20 bg-blue-400/10 text-blue-200">
+    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-xl shadow-black/20">
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-sky-300/20 bg-sky-400/[0.10] text-sky-200">
         <WorkIcon icon={track.icon} />
       </div>
-      <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-300">
+      <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-200">
         {track.label}
       </div>
       <div className="mt-3 text-2xl font-semibold tracking-tight text-white">
         {track.stat}
       </div>
-      <p className="mt-3 text-sm leading-6 text-gray-400">{track.text}</p>
+      <p className="mt-3 text-sm leading-6 text-gray-200">{track.text}</p>
     </div>
   );
 }
@@ -289,7 +289,7 @@ function WorkTracksSection() {
   return (
     <section id="work-tracks" className="mt-24 scroll-mt-28">
       <div className="mb-6">
-        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
           Additional Leica Work
         </div>
 
@@ -307,25 +307,65 @@ function WorkTracksSection() {
   );
 }
 
+function TeamEnvironmentSection() {
+  return (
+    <section id="team-environment" className="mt-24 scroll-mt-28">
+      <div className="grid gap-8 rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-5 shadow-2xl shadow-black/25 md:p-7 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+        <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-black/30">
+          <div className="relative aspect-[4/3]">
+            <Image
+              src="/Team Image.jpg"
+              alt="Leica Biosystems hardware engineering team group photo"
+              fill
+              sizes="(max-width: 1024px) 100vw, 60vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+
+        <div>
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
+            Team + Engineering Environment
+          </div>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+            Design, manufacturing, and V&V work with the Leica team.
+          </h2>
+          <p className="mt-4 text-base leading-7 text-gray-100">
+            Over the summer, I contributed across design, manufacturing, and
+            verification and validation workflows while also working on a project
+            to update the CS2 CAD design.
+          </p>
+          <p className="mt-4 text-sm leading-6 text-gray-200">
+            I am grateful to the mentors and team at Leica Biosystems for
+            guiding me, giving me the opportunity to learn, and helping me make
+            an impact I can carry into the rest of my mechanical engineering
+            journey.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function SideMenu() {
   return (
     <aside className="hidden xl:block">
-      <div className="sticky top-8 rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-4 shadow-2xl shadow-black/20 backdrop-blur">
+      <div className="sticky top-8 rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-4 shadow-2xl shadow-black/25 backdrop-blur">
         <Link
           href="/"
-          className="block rounded-xl px-3 py-2 text-sm text-gray-400 transition hover:bg-white/[0.07] hover:text-white"
+          className="block rounded-xl px-3 py-2 text-sm text-gray-200 transition hover:bg-white/[0.06] hover:text-white"
         >
           ← Back Home
         </Link>
 
-        <div className="mt-4 px-3 text-xs font-semibold uppercase tracking-[0.16em] text-blue-300">
+        <div className="mt-4 px-3 text-xs font-semibold uppercase tracking-[0.16em] text-sky-200">
           Leica
         </div>
 
         <nav className="mt-4 space-y-1 text-sm">
           <a
             href="#metrics"
-            className="block rounded-xl px-3 py-2 text-gray-300 transition hover:bg-white/[0.07] hover:text-white"
+            className="block rounded-xl px-3 py-2 text-gray-200 transition hover:bg-white/[0.06] hover:text-white"
           >
             Metrics
           </a>
@@ -334,22 +374,29 @@ function SideMenu() {
             <a
               key={block.id}
               href={`#${block.id}`}
-              className="block rounded-xl px-3 py-2 text-gray-300 transition hover:bg-white/[0.07] hover:text-white"
+              className="block rounded-xl px-3 py-2 text-gray-200 transition hover:bg-white/[0.06] hover:text-white"
             >
               {block.eyebrow.split("/")[1].trim()}
             </a>
           ))}
 
           <a
+            href="#team-environment"
+            className="block rounded-xl px-3 py-2 text-gray-200 transition hover:bg-white/[0.06] hover:text-white"
+          >
+            Team
+          </a>
+
+          <a
             href="#work-tracks"
-            className="block rounded-xl px-3 py-2 text-gray-300 transition hover:bg-white/[0.07] hover:text-white"
+            className="block rounded-xl px-3 py-2 text-gray-200 transition hover:bg-white/[0.06] hover:text-white"
           >
             Additional Work
           </a>
 
           <Link
             href="/projects"
-            className="mt-4 block rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2 text-gray-300 transition hover:bg-white/[0.08] hover:text-white"
+            className="mt-4 block rounded-xl border border-white/10 bg-white/[0.035] px-3 py-2 text-gray-100 transition hover:border-sky-300/40 hover:bg-sky-400/[0.10] hover:text-white"
           >
             Projects
           </Link>
@@ -361,7 +408,7 @@ function SideMenu() {
 
 export default function ExperiencePage() {
   return (
-    <main className="min-h-screen bg-[linear-gradient(to_bottom,_#050505,_#0f172a_45%,_#050505)] px-6 py-10 text-gray-100 md:px-10 md:py-14">
+    <main className="min-h-screen bg-[linear-gradient(to_bottom,_#0b1020,_#172033_45%,_#080b12)] px-6 py-10 text-white md:px-10 md:py-14">
       <div className="mx-auto grid max-w-[1520px] gap-8 xl:grid-cols-[240px_minmax(0,1fr)]">
         <SideMenu />
 
@@ -371,11 +418,11 @@ export default function ExperiencePage() {
               Leica Biosystems (Danaher)
             </h1>
 
-            <p className="mt-5 max-w-3xl text-2xl font-semibold tracking-tight text-blue-200 md:text-3xl">
+            <p className="mt-5 max-w-3xl text-2xl font-semibold tracking-tight text-sky-200 md:text-3xl">
               Hardware Engineering Intern
             </p>
 
-            <p className="mt-5 max-w-4xl text-lg leading-8 text-gray-300">
+            <p className="mt-5 max-w-4xl text-lg leading-8 text-gray-100">
               As a hardware engineering intern, I worked on CS2 CAD/BOM
               recovery, drawing support, hardware checks, GT 450 manufacturing
               support, verification, quality inspection, and traceability work.
@@ -400,6 +447,7 @@ export default function ExperiencePage() {
             ))}
           </div>
 
+          <TeamEnvironmentSection />
           <WorkTracksSection />
         </div>
       </div>

@@ -40,7 +40,7 @@ export default function AboutPage() {
   return (
     <main
       id="main"
-      className="min-h-screen bg-[linear-gradient(to_bottom,_#050505,_#0f172a_48%,_#050505)] px-6 py-10 text-gray-100 md:px-10 md:py-14"
+      className="min-h-screen bg-[linear-gradient(to_bottom,_#0b1020,_#172033_48%,_#080b12)] px-6 py-10 text-white md:px-10 md:py-14"
     >
       <div className="mx-auto max-w-7xl">
         <nav
@@ -49,26 +49,26 @@ export default function AboutPage() {
         >
           <Link
             href="/"
-            className="rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-gray-300 transition hover:bg-white/[0.08] hover:text-white"
+            className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-gray-100 shadow-xl shadow-black/20 transition hover:border-sky-300/40 hover:bg-sky-400/[0.10] hover:text-white"
           >
             ← Home
           </Link>
           <Link
             href="/projects"
-            className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-gray-400 transition hover:bg-white/[0.08] hover:text-white"
+            className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-gray-200 shadow-xl shadow-black/20 transition hover:border-sky-300/40 hover:bg-sky-400/[0.10] hover:text-white"
           >
             Projects
           </Link>
           <Link
             href="/experience"
-            className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-gray-400 transition hover:bg-white/[0.08] hover:text-white"
+            className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-gray-200 shadow-xl shadow-black/20 transition hover:border-sky-300/40 hover:bg-sky-400/[0.10] hover:text-white"
           >
             Experience / Internships
           </Link>
         </nav>
 
         <section className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
-          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.035] shadow-2xl shadow-black/25">
+          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/25">
             <div className="relative h-[420px] bg-black/30 md:h-[620px]">
               <Image
                 src={profileImage.src}
@@ -80,7 +80,7 @@ export default function AboutPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 px-6 pb-6 pt-20">
-                <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-200">
+                <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-200">
                   UC San Diego
                 </div>
                 <p className="mt-2 text-lg font-semibold text-white">
@@ -90,9 +90,9 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between rounded-[2rem] border border-white/10 bg-white/[0.035] p-7 shadow-2xl shadow-black/20 md:p-9">
+          <div className="flex flex-col justify-between rounded-[2rem] border border-white/10 bg-white/[0.04] p-7 shadow-2xl shadow-black/25 md:p-9">
             <div>
-              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
                 About Me
               </div>
 
@@ -100,7 +100,7 @@ export default function AboutPage() {
                 Alex Pacheco Santiago
               </h1>
 
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-300">
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-100">
                 Mechanical engineering student focused on hardware that moves
                 from CAD into real prototypes, testing, and iteration.
               </p>
@@ -110,12 +110,12 @@ export default function AboutPage() {
               {profileCards.map((card) => (
                 <div
                   key={card.label}
-                  className="rounded-2xl border border-white/10 bg-black/20 p-5"
+                  className="rounded-2xl border border-white/10 bg-white/[0.035] p-5"
                 >
-                  <div className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-300">
+                  <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-200">
                     {card.label}
                   </div>
-                  <p className="mt-3 text-sm leading-6 text-gray-300">
+                  <p className="mt-3 text-sm leading-6 text-gray-200">
                     {card.text}
                   </p>
                 </div>
@@ -123,7 +123,7 @@ export default function AboutPage() {
             </div>
 
             <div className="mt-8 border-t border-white/10 pt-6">
-              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
                 Tools + Shop Work
               </div>
               <div className="mt-4 grid gap-5 md:grid-cols-3">
@@ -132,7 +132,7 @@ export default function AboutPage() {
                     <div className="text-sm font-semibold text-white">
                       {group.label}
                     </div>
-                    <p className="mt-2 text-sm leading-6 text-gray-400">
+                    <p className="mt-2 text-sm leading-6 text-gray-200">
                       {group.text}
                     </p>
                   </div>
