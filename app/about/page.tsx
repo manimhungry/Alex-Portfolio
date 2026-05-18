@@ -4,15 +4,34 @@ import Link from "next/link";
 const profileCards = [
   {
     label: "Currently",
-    text: "Mechanical Engineering student at UC San Diego.",
+    text: "Mechanical Engineering at UC San Diego. Graduating December 2026.",
   },
   {
-    label: "Interested in",
-    text: "Hardware roles where CAD, fabrication, and validation meet.",
+    label: "Best Fit",
+    text: "Hardware roles where design, build, and validation touch real parts.",
   },
   {
     label: "How I Work",
-    text: "Define the objective, build the hardware, measure it, and iterate.",
+    text: "Define the goal. Build the proof. Measure what changed.",
+  },
+];
+
+const whyMeCards = [
+  {
+    label: "Competitive Follow-Through",
+    text: "When I set my mind on a problem, I keep working until the hardware gives a real answer.",
+  },
+  {
+    label: "High Standards",
+    text: "I care about clean CAD, repeatable setups, and details that show up during assembly.",
+  },
+  {
+    label: "Team Alignment",
+    text: "I work best when everyone understands the goal, the constraints, and the next step.",
+  },
+  {
+    label: "Creative Problem Solving",
+    text: "I like finding mechanical paths through messy constraints and making them testable.",
   },
 ];
 
@@ -96,13 +115,19 @@ export default function AboutPage() {
                 About Me
               </div>
 
-              <h1 className="mt-4 max-w-4xl text-5xl font-bold tracking-tight text-white md:text-7xl">
+              <h1 className="mt-4 max-w-4xl text-5xl font-bold tracking-tight text-white md:text-6xl">
                 Alex Pacheco Santiago
               </h1>
 
               <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-100">
-                Mechanical engineering student focused on hardware that moves
-                from CAD into real prototypes, testing, and iteration.
+                I like practical hardware problems: the kind where a model,
+                prototype, test result, and real assembly all have to agree.
+              </p>
+
+              <p className="mt-4 max-w-3xl text-base leading-7 text-gray-200">
+                I am competitive, detail-driven, and team-oriented. When I care
+                about a build, I can work on it obsessively, but I still want
+                the team on the same page while the work gets sharper.
               </p>
             </div>
 
@@ -120,6 +145,27 @@ export default function AboutPage() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-8 border-t border-white/10 pt-6">
+              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
+                Why Me
+              </div>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                {whyMeCards.map((card) => (
+                  <div
+                    key={card.label}
+                    className="rounded-2xl border border-white/10 bg-white/[0.035] p-5"
+                  >
+                    <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-200">
+                      {card.label}
+                    </div>
+                    <p className="mt-3 text-sm leading-6 text-gray-200">
+                      {card.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="mt-8 border-t border-white/10 pt-6">

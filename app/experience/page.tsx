@@ -33,16 +33,22 @@ const metrics: Metric[] = [
   { label: "Manufacturing procedures", value: "15+" },
 ];
 
+const roleMeta: Metric[] = [
+  { label: "Company", value: "Leica Biosystems (Danaher)" },
+  { label: "Role", value: "Hardware Engineering Intern" },
+  { label: "Scope", value: "Design, manufacturing, V&V" },
+];
+
 const storyBlocks: StoryBlock[] = [
   {
     id: "cs2-cad-recovery",
     eyebrow: "01 / CS2 CAD Recovery",
-    title: "The scanner CAD had drifted from reality.",
+    title: "Scanner CAD had drifted.",
     stat: "~100 CAD fixes",
     bullets: [
-      "Resolved broken mates and references",
+      "Resolved broken mates",
       "Rebuilt assembly structure",
-      "Cleaned up legacy scanner CAD",
+      "Cleaned legacy scanner CAD",
     ],
     image: {
       src: "/leica-cad-errors.png",
@@ -54,12 +60,12 @@ const storyBlocks: StoryBlock[] = [
   {
     id: "cs2-bom-recovery",
     eyebrow: "02 / CS2 BOM Recovery",
-    title: "The BOM did not match the physical scanner.",
+    title: "The BOM did not match hardware.",
     stat: "15/60 → 57/60",
     bullets: [
       "Added current CS2 hardware",
       "Removed obsolete components",
-      "Matched CAD/BOM closer to the production scanner",
+      "Moved CAD/BOM closer to production hardware",
     ],
     image: {
       src: "/leica-cs2-cad.png",
@@ -71,11 +77,11 @@ const storyBlocks: StoryBlock[] = [
   {
     id: "cs2-hardware-checks",
     eyebrow: "03 / CS2 Hardware Checks",
-    title: "The model had to agree with real hardware.",
+    title: "CAD had to match the scanner.",
     stat: "CAD ↔ hardware",
     bullets: [
-      "Compared CAD against as-built scanner hardware",
-      "Checked fit, clearance, and revision mismatches",
+      "Compared CAD to as-built hardware",
+      "Checked fit, clearance, and revisions",
       "Flagged issues for engineering review",
     ],
     image: {
@@ -87,10 +93,10 @@ const storyBlocks: StoryBlock[] = [
   {
     id: "drawing-support",
     eyebrow: "04 / Drawing Support",
-    title: "Released drawing work reached manufacturing.",
+    title: "Drawings supported manufacturing.",
     stat: "Production use",
     bullets: [
-      "Created and updated SOLIDWORKS drawings",
+      "Created and updated drawings",
       "Applied GD&T under engineering review",
       "Autocollimator drawings later used for manufacturing",
     ],
@@ -101,19 +107,19 @@ const workTracks: WorkTrack[] = [
   {
     label: "Manufacturing support",
     stat: "15+ procedures",
-    text: "Built and checked GT 450 scanner hardware from controlled procedures.",
+    text: "Built and checked GT 450 hardware from controlled procedures.",
     icon: "tool",
   },
   {
     label: "Verification + testing",
     stat: "5 verification tasks",
-    text: "Verified hardware behavior, XY travel, and screen-wipe durability.",
+    text: "Verified behavior, XY travel, and screen-wipe durability.",
     icon: "checklist",
   },
   {
     label: "Design + drawing support",
     stat: "Drawings + fixtures",
-    text: "Updated drawings, BOM balloons, fixtures, and 3D-print support work.",
+    text: "Updated drawings, BOM balloons, fixtures, and printed supports.",
     icon: "drawing",
   },
   {
@@ -134,6 +140,26 @@ function MetricCard({ label, value }: Metric) {
       <div className="mt-3 text-2xl font-semibold tracking-tight text-white">
         {value}
       </div>
+    </div>
+  );
+}
+
+function MetaStrip({ items }: { items: Metric[] }) {
+  return (
+    <div className="grid gap-3 md:grid-cols-3">
+      {items.map((item) => (
+        <div
+          key={item.label}
+          className="rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3"
+        >
+          <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-300">
+            {item.label}
+          </div>
+          <div className="mt-2 text-sm leading-6 text-gray-100">
+            {item.value}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -328,18 +354,15 @@ function TeamEnvironmentSection() {
             Team + Engineering Environment
           </div>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white md:text-4xl">
-            Design, manufacturing, and V&V work with the Leica team.
+            Design, manufacturing, and V&V with the Leica team.
           </h2>
           <p className="mt-4 text-base leading-7 text-gray-100">
-            Over the summer, I contributed across design, manufacturing, and
-            verification and validation workflows while also working on a project
-            to update the CS2 CAD design.
+            I contributed across design, manufacturing, and V&V while updating
+            the CS2 CAD design.
           </p>
           <p className="mt-4 text-sm leading-6 text-gray-200">
-            I am grateful to the mentors and team at Leica Biosystems for
-            guiding me, giving me the opportunity to learn, and helping me make
-            an impact I can carry into the rest of my mechanical engineering
-            journey.
+            I am grateful to the mentors and team who helped me learn, build,
+            and contribute to production hardware.
           </p>
         </div>
       </div>
@@ -414,8 +437,8 @@ export default function ExperiencePage() {
 
         <div className="min-w-0">
           <header className="mb-14">
-            <h1 className="max-w-5xl text-5xl font-bold tracking-tight text-white md:text-6xl">
-              Leica Biosystems (Danaher)
+            <h1 className="max-w-5xl text-4xl font-bold tracking-tight text-white md:text-5xl">
+              Leica Biosystems <span className="text-gray-300">(Danaher)</span>
             </h1>
 
             <p className="mt-5 max-w-3xl text-2xl font-semibold tracking-tight text-sky-200 md:text-3xl">
@@ -423,10 +446,19 @@ export default function ExperiencePage() {
             </p>
 
             <p className="mt-5 max-w-4xl text-lg leading-8 text-gray-100">
-              As a hardware engineering intern, I worked on CS2 CAD/BOM
-              recovery, drawing support, hardware checks, GT 450 manufacturing
-              support, verification, quality inspection, and traceability work.
+              Hardware engineering work across CS2 CAD/BOM recovery, drawings,
+              manufacturing support, verification, inspection, and traceability.
             </p>
+
+            <div className="mt-6 max-w-4xl">
+              <MetaStrip items={roleMeta} />
+            </div>
+
+            <div className="mt-6 max-w-4xl rounded-2xl border border-sky-300/20 bg-sky-400/[0.08] px-5 py-4 text-base leading-7 text-sky-50">
+              Hardest problem: production hardware work had to stay traceable,
+              so CAD cleanup, BOM recovery, drawings, and physical checks all
+              had to agree.
+            </div>
           </header>
 
           <section id="metrics" className="mb-14 scroll-mt-28">

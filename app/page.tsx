@@ -35,6 +35,11 @@ type ProofImage = {
   contain?: boolean;
 };
 
+type ProofStat = {
+  value: string;
+  label: string;
+};
+
 const headerLinks: ContactLink[] = [
   { label: "Resume", href: "/Resume.pdf", external: true },
   {
@@ -62,19 +67,19 @@ const featuredLinks: FeaturedLink[] = [
   {
     eyebrow: "Featured",
     title: "Automated Dispensing",
-    text: "Fixture design, robot calibration, and 5 µL dispense validation.",
-    href: "/projects#nordson",
+    text: "Fixture design and robot dispense validation.",
+    href: "/projects/nordson",
   },
   {
     eyebrow: "Hardware",
     title: "Direct Drive Turret",
-    text: "Belt-drive replacement, backlash reduction, and serviceability improvement.",
+    text: "Direct-drive redesign with ~40% faster service.",
     href: "/projects#direct-drive-turret",
   },
   {
     eyebrow: "Leica",
     title: "Experience / Internships",
-    text: "CAD/BOM recovery, manufacturing support, and verification on production hardware.",
+    text: "CAD/BOM recovery, manufacturing, and V&V support.",
     href: "/experience",
   },
 ];
@@ -84,7 +89,7 @@ const proofImages: ProofImage[] = [
     src: "/setup.jpg",
     alt: "Automated dispensing setup with robot stage and custom tray",
     label: "Nordson fixture workflow",
-    href: "/projects#nordson",
+    href: "/projects/nordson",
   },
   {
     src: "/direct-drive-assembly.png",
@@ -99,6 +104,21 @@ const proofImages: ProofImage[] = [
     alt: "Leica hardware work video",
     label: "Leica hardware work",
     href: "/experience#cs2-cad-recovery",
+  },
+];
+
+const proofStats: ProofStat[] = [
+  {
+    value: "5 µL",
+    label: "100-position dispense validation",
+  },
+  {
+    value: "~100",
+    label: "production CAD fixes at Leica",
+  },
+  {
+    value: "15 → 9 min",
+    label: "turret service time",
   },
 ];
 
@@ -197,6 +217,17 @@ function ProofImageCard({ item, featured = false }: { item: ProofImage; featured
   );
 }
 
+function ProofStatCard({ stat }: { stat: ProofStat }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-4 shadow-xl shadow-black/20 backdrop-blur-md">
+      <div className="text-2xl font-bold tracking-tight text-white">
+        {stat.value}
+      </div>
+      <p className="mt-2 text-xs leading-5 text-gray-200">{stat.label}</p>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <main id="main" className="relative min-h-screen overflow-hidden text-white">
@@ -241,24 +272,33 @@ export default function Home() {
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div className="text-left">
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">
-                About Me
+                Hello.
               </div>
 
-              <h2 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-white md:text-6xl">
-                Hi, I&apos;m Alex.
+              <h2 className="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-white md:text-5xl">
+                I&apos;m Alex.
               </h2>
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-100 md:text-xl">
-                I&apos;m from Escondido, California. I&apos;ve always loved science, math, and watching my dad solve practical problems with care.
+                I&apos;m a Mechanical Engineering student at UC San Diego
+                graduating in December 2026.
               </p>
 
               <p className="mt-4 max-w-2xl text-base leading-7 text-gray-200 md:text-lg">
-                I&apos;m a Mechanical Engineering student at UC San Diego graduating in December 2026. I design, test, and validate hardware through the Wang Lab, Triton Robotics, and my hardware engineering internship at Leica Biosystems.
+                I design, build, test, and validate hardware through the Wang
+                Lab, Triton Robotics, and my hardware engineering internship at
+                Leica Biosystems.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
                 {heroButtons.map((item) => (
                   <HeroCTA key={item.label} item={item} />
+                ))}
+              </div>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                {proofStats.map((stat) => (
+                  <ProofStatCard key={stat.value} stat={stat} />
                 ))}
               </div>
             </div>
