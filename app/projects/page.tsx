@@ -509,22 +509,7 @@ export default function ProjectsPage() {
           </p>
         </header>
 
-        <section className="mb-12 border-y border-white/10 py-5">
-          <div className="grid gap-5 text-sm leading-6 text-gray-200 md:grid-cols-3">
-            <div>
-              <div className="font-semibold text-white">Proof first</div>
-              <p className="mt-1">Each project leads with measurable evidence.</p>
-            </div>
-            <div>
-              <div className="font-semibold text-white">Real constraints</div>
-              <p className="mt-1">The work shows fit, travel, calibration, and testing limits.</p>
-            </div>
-            <div>
-              <div className="font-semibold text-white">Current work labeled</div>
-              <p className="mt-1">Unfinished builds are clearly marked before they become case studies.</p>
-            </div>
-          </div>
-        </section>
+        {/* Removed three descriptive blocks: Proof first / Real constraints / Current work labeled */}
 
         <FeaturedProject />
         <CurrentBuild />
