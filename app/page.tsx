@@ -280,14 +280,11 @@ export default function Home() {
               </h2>
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-100 md:text-xl">
-                I&apos;m a Mechanical Engineering student at UC San Diego
-                graduating in December 2026.
+                Mechanical Engineering student, UC San Diego — graduating Dec 2026.
               </p>
 
               <p className="mt-4 max-w-2xl text-base leading-7 text-gray-200 md:text-lg">
-                I design, build, test, and validate hardware through the Wang
-                Lab, Triton Robotics, and my hardware engineering internship at
-                Leica Biosystems.
+                Design, build, and validate hardware (Wang Lab, Triton Robotics, Leica internship).
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">

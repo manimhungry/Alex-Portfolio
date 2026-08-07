@@ -5,8 +5,7 @@ import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: "Nordson Dispensing Case Study | Alex Pacheco",
-  description:
-    "Automated dispensing case study with fixture design, calibration, testing, and scale-up.",
+  description: "Automated dispensing case study: fixture design, calibration, testing.",
 };
 
 type Metric = {
@@ -44,28 +43,16 @@ const summaryStats: Metric[] = [
 ];
 
 const projectMeta: Metric[] = [
-  { label: "Context", value: "Wang Lab / active" },
-  { label: "Role", value: "Fixture + validation owner" },
-  { label: "Tools", value: "Nordson robot, CAD, FDM, scale data" },
+  { label: "Context", value: "Wang Lab" },
+  { label: "Role", value: "Fixture & validation" },
+  { label: "Tools", value: "Nordson robot, CAD, FDM" },
 ];
 
 const snapshots: Snapshot[] = [
-  {
-    label: "Objective",
-    text: "Automate tray-based dispensing.",
-  },
-  {
-    label: "My Role",
-    text: "Owned fixture design, robot setup, calibration, and testing.",
-  },
-  {
-    label: "Tools",
-    text: "Nordson robot, CAD, FDM prototypes, scale data, dispense tests.",
-  },
-  {
-    label: "Result",
-    text: "Moved from manual setup to a repeatable robot process.",
-  },
+  { label: "Objective", text: "Automate tray dispensing." },
+  { label: "My Role", text: "Fixture design, robot setup, calibration, testing." },
+  { label: "Tools", text: "Nordson robot, CAD, FDM, scale tests." },
+  { label: "Result", text: "Manual → repeatable robot process." },
 ];
 
 const sections: Section[] = [
@@ -781,7 +768,7 @@ export default function NordsonProjectPage() {
 
           <header id="overview" className="mb-14 scroll-mt-28">
             <div className="inline-flex rounded-full border border-amber-300/30 bg-amber-400/[0.1] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-amber-200 shadow-lg shadow-amber-950/20">
-              Featured Project / Active Lab Work
+              Featured Project
             </div>
 
             <h1 className="mt-6 max-w-6xl text-5xl font-bold tracking-tight text-white md:text-6xl">
@@ -789,7 +776,7 @@ export default function NordsonProjectPage() {
             </h1>
 
             <p className="mt-6 max-w-5xl text-xl leading-8 text-gray-100 md:text-2xl md:leading-9">
-              Fixture design, robot calibration, and validation.
+              Fixture design, calibration, validation.
             </p>
           </header>
 
@@ -799,8 +786,7 @@ export default function NordsonProjectPage() {
                 Executive Summary
               </div>
               <p className="mt-4 text-lg leading-8 text-gray-100">
-                Manual setup became a calibrated robot process. New fluid
-                testing is next.
+                Manual setup → calibrated robot process. Next: new fluid testing.
               </p>
 
               <div className="mt-5">
@@ -808,9 +794,7 @@ export default function NordsonProjectPage() {
               </div>
 
               <div className="mt-5 rounded-2xl border border-amber-300/20 bg-amber-400/[0.08] px-5 py-4 text-base leading-7 text-amber-50">
-                Hardest problem: the reference model did not match the physical
-                baseplate, so the fixture had to be rebuilt from measured
-                hardware instead of trusted CAD.
+                Reference CAD did not match the baseplate; rebuilt fixture from measured hardware.
               </div>
 
               <div className="mt-5">

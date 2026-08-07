@@ -2,37 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 const profileCards = [
-  {
-    label: "Currently",
-    text: "Mechanical Engineering at UC San Diego. Graduating December 2026.",
-  },
-  {
-    label: "Best Fit",
-    text: "Hardware roles where design, build, and validation touch real parts.",
-  },
-  {
-    label: "How I Work",
-    text: "Define the goal. Build the proof. Measure what changed.",
-  },
+  { label: "Currently", text: "Mechanical Engineering, UC San Diego — Dec 2026." },
+  { label: "Best Fit", text: "Hardware roles: design, build, validation." },
+  { label: "How I Work", text: "Define goal. Build proof. Measure results." },
 ];
 
 const whyMeCards = [
-  {
-    label: "Competitive Follow-Through",
-    text: "When I set my mind on a problem, I keep working until the hardware gives a real answer.",
-  },
-  {
-    label: "High Standards",
-    text: "I care about clean CAD, repeatable setups, and details that show up during assembly.",
-  },
-  {
-    label: "Team Alignment",
-    text: "I work best when everyone understands the goal, the constraints, and the next step.",
-  },
-  {
-    label: "Creative Problem Solving",
-    text: "I like finding mechanical paths through messy constraints and making them testable.",
-  },
+  { label: "Follow-Through", text: "Work until hardware gives a real answer." },
+  { label: "Standards", text: "Clean CAD, repeatable setups, assembly-aware details." },
+  { label: "Team Alignment", text: "Keep team aligned on goal, constraints, next step." },
+  { label: "Problem Solving", text: "Find mechanical paths through messy constraints; make them testable." },
 ];
 
 const toolGroups = [
@@ -120,14 +99,11 @@ export default function AboutPage() {
               </h1>
 
               <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-100">
-                I like practical hardware problems: the kind where a model,
-                prototype, test result, and real assembly all have to agree.
+                I solve practical hardware problems where model, prototype, test, and assembly must align.
               </p>
 
               <p className="mt-4 max-w-3xl text-base leading-7 text-gray-200">
-                I am competitive, detail-driven, and team-oriented. When I care
-                about a build, I can work on it obsessively, but I still want
-                the team on the same page while the work gets sharper.
+                Detail-driven and team-focused. I prioritize clean CAD, repeatable setups, and clear next steps.
               </p>
             </div>
 

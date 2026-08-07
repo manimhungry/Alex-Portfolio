@@ -446,8 +446,7 @@ export default function ExperiencePage() {
             </p>
 
             <p className="mt-5 max-w-4xl text-lg leading-8 text-gray-100">
-              Hardware engineering work across CS2 CAD/BOM recovery, drawings,
-              manufacturing support, verification, inspection, and traceability.
+              Hardware engineering: CAD/BOM recovery, drawings, manufacturing support, verification, inspection.
             </p>
 
             <div className="mt-6 max-w-4xl">
@@ -455,9 +454,7 @@ export default function ExperiencePage() {
             </div>
 
             <div className="mt-6 max-w-4xl rounded-2xl border border-sky-300/20 bg-sky-400/[0.08] px-5 py-4 text-base leading-7 text-sky-50">
-              Hardest problem: production hardware work had to stay traceable,
-              so CAD cleanup, BOM recovery, drawings, and physical checks all
-              had to agree.
+              Production hardware required traceability: CAD, BOM, drawings, and physical checks had to match.
             </div>
           </header>
 
