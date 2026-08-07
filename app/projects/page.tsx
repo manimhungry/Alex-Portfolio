@@ -59,26 +59,16 @@ const projects: ProjectCard[] = [
     team: "Triton Robotics",
     tools: "SOLIDWORKS, waterjet, FDM",
     outcome: "Removed the belt path and cut service time from 15 to 9 minutes.",
-    challenge:
-      "Hardest problem: packaging the motor, bearing stack, and slip-ring path without making service access worse.",
+    challenge: "Packaging motor, bearing stack, and slip-ring path while retaining service access.",
     media: {
       src: "/direct-drive-assembly.png",
       alt: "Direct-drive turret CAD assembly",
       contain: true,
     },
     snapshots: [
-      {
-        label: "Objective",
-        text: "Replace the belt path with direct drive.",
-      },
-      {
-        label: "My Role",
-        text: "Owned mount geometry, bearing stack, and slip-ring clearance.",
-      },
-      {
-        label: "Result",
-        text: "1:1 drive and about 40% faster service.",
-      },
+        { label: "Objective", text: "Replace belt drive with direct drive." },
+      { label: "My Role", text: "Mount geometry, bearing stack, slip-ring clearance." },
+      { label: "Result", text: "1:1 drive; ~40% faster service." },
     ],
     evidence: [
       {
@@ -107,26 +97,16 @@ const projects: ProjectCard[] = [
     team: "Triton UAS",
     tools: "CAD, fabrication, flight test",
     outcome: "Led a rapid aircraft build through shakedown flight.",
-    challenge:
-      "Hardest problem: moving fast while still leaving enough margin for a controlled flight test.",
+    challenge: "Balancing build speed with margin for a controlled flight test.",
     media: {
       type: "video",
       src: "/Test.mp4",
       alt: "V-tail aircraft shakedown flight",
     },
     snapshots: [
-      {
-        label: "Objective",
-        text: "Build a flyable aircraft quickly.",
-      },
-      {
-        label: "My Role",
-        text: "Led CAD layout, packaging, fabrication, and V-tail integration.",
-      },
-      {
-        label: "Result",
-        text: "Validated structure, controls, and power in flight.",
-      },
+      { label: "Objective", text: "Build a flyable aircraft." },
+      { label: "My Role", text: "CAD layout, packaging, fabrication, V-tail integration." },
+      { label: "Result", text: "Validated structure, controls, and power in flight." },
     ],
     evidence: [
       {
@@ -155,26 +135,16 @@ const projects: ProjectCard[] = [
     team: "Student build team",
     tools: "Fusion 360, laser cutting, testing",
     outcome: "Built and tuned a timed retrieval robot for competition runs.",
-    challenge:
-      "Hardest problem: making the intake and lift repeatable under competition timing instead of only working once.",
+    challenge: "Making the intake and lift repeatable under competition timing.",
     media: {
       type: "video",
       src: "/Action.mp4",
       alt: "Ball retrieval robot test run",
     },
     snapshots: [
-      {
-        label: "Objective",
-        text: "Collect and deliver balls in 60 seconds.",
-      },
-      {
-        label: "My Role",
-        text: "Designed the drivetrain and lift, fabricated parts, and tuned runs.",
-      },
-      {
-        label: "Result",
-        text: "20 balls in 15 seconds at peak. 6th of 12 teams.",
-      },
+      { label: "Objective", text: "Collect and deliver balls in 60s." },
+      { label: "My Role", text: "Drivetrain and lift design, fabrication, tuning." },
+      { label: "Result", text: "20 balls in 15s peak; 6/12 teams." },
     ],
     evidence: [
       {
@@ -334,7 +304,7 @@ function FeaturedProject() {
         <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
             <div className="inline-flex rounded-full border border-amber-300/30 bg-amber-400/[0.12] px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-amber-200">
-              Featured Project / Active Lab Work
+              Featured Project
             </div>
 
             <h2 className="mt-5 max-w-4xl text-4xl font-bold tracking-tight text-white md:text-5xl">
@@ -342,15 +312,15 @@ function FeaturedProject() {
             </h2>
 
             <p className="mt-4 max-w-3xl text-lg leading-8 text-gray-100">
-              Fixture design, robot calibration, and dispense validation.
+              Fixture design, calibration, dispense validation.
             </p>
 
             <div className="mt-5 max-w-3xl">
               <MetaRow
                 items={[
-                  { label: "Context", value: "Wang Lab / active" },
-                  { label: "Role", value: "Fixture + validation owner" },
-                  { label: "Next", value: "New fluid test" },
+                  { label: "Context", value: "Wang Lab" },
+                  { label: "Role", value: "Fixture & validation" },
+                  { label: "Next", value: "Fluid test" },
                 ]}
               />
             </div>
@@ -395,7 +365,7 @@ function CurrentBuild() {
             Six-Axis Robot System
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-7 text-gray-100">
-            Parts are staged. First motion and repeatability testing are next.
+            Parts staged. Next: first motion and repeatability tests.
           </p>
           <div className="mt-5">
             <TagList tags={["Robotics", "Motion System", "Assembly Pending"]} />
@@ -502,10 +472,10 @@ export default function ProjectsPage() {
             Project Gallery
           </div>
           <h1 className="mt-4 text-5xl font-bold tracking-tight text-white md:text-6xl">
-            Selected Work
+            Selected Engineering Work
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-200">
-            A quick view of the work. Open Nordson for the full case study.
+            Selected engineering work. Open Nordson for the full case study.
           </p>
         </header>
 
